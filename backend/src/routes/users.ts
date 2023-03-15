@@ -5,7 +5,10 @@ const userRoute = Router();
 // CONTROLLERS
 import { loginHandler, signUpHandler } from "../controllers/users";
 
-userRoute.post("/", loginHandler);
+// SERVICES
+import { Authenticator } from "../Services/Authenticator";
+
+userRoute.post("/login", Authenticator, loginHandler);
 userRoute.post("/signup", signUpHandler);
 
 export default userRoute;

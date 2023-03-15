@@ -5,3 +5,8 @@ export interface signUpBody {
   password: string;
   fullname: string;
 }
+
+export interface loginBody {
+  username: string;
+  password: string;
+}

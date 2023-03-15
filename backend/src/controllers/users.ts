@@ -1,8 +1,11 @@
-import { signUpBody } from "../modals/users";
+import ErrorHandler from "../Services/ErrorHandler";
 import db from "../database/db";
 import { Encrypter } from "../Services/Bcrypt";
+import { signUpBody } from "../modals/users";
 
-export const loginHandler = (req: any, res: any, next: any) => {};
+export const loginHandler = (req: any, res: any, next: any) => {
+  res.status(200).send("OK!");
+};
 
 export const signUpHandler = async (req: any, res: any, next: any) => {
   const body: signUpBody = req.body;
@@ -11,7 +14,7 @@ export const signUpHandler = async (req: any, res: any, next: any) => {
   const email = body.email;
   const password = body.password;
   const phonenumber = body.phonenumber;
-  
+
   const hashedPassword = await Encrypter(password);
 
   try {
@@ -29,6 +32,6 @@ export const signUpHandler = async (req: any, res: any, next: any) => {
       res.status(201).send("OK!");
     }
   } catch (error: any) {
-    console.log(error);
+    next(new ErrorHandler(error.messsage, 500));
   }
 };
