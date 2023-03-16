@@ -15,6 +15,7 @@ const Navbar = () => {
         </div>
         <div className="text-md hidden gap-7 md:flex">
           <p className="pointer-events-auto cursor-pointer">Login</p>
+          <p className="pointer-events-auto cursor-pointer">Sign Up</p>
           <p className="pointer-events-auto cursor-pointer">About</p>
           <p className="pointer-events-auto cursor-pointer">Contact Us</p>
         </div>
@@ -29,12 +30,15 @@ const Navbar = () => {
             Login
           </p>
           <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
+            Sign Up
+          </p>
+          <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
             Contact Us
           </p>
           <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
             About
           </p>
-          <div className="pointer-events-auto mt-10 flex cursor-pointer items-center justify-center rounded-full bg-blue-200 p-2 text-4xl">
+          <div className="pointer-events-auto mt-8 flex cursor-pointer items-center justify-center rounded-full bg-blue-200 p-2 text-4xl">
             <IoClose onClick={toggler} />
           </div>
         </div>
