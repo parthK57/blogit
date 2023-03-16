@@ -13,8 +13,7 @@ export const signUpHandler = async (req: any, res: any, next: any) => {
   const fullname = body.fullname;
   const email = body.email;
   const password = body.password;
-  const phonenumber = body.phonenumber;
-
+  // console.log(fullname, username, email, password);
   const hashedPassword = await Encrypter(password);
 
   try {
@@ -26,8 +25,8 @@ export const signUpHandler = async (req: any, res: any, next: any) => {
       next(new ErrorHandler("User Already Exists!", 400));
     else {
       await db.execute(
-        "INSERT INTO users (fullname, username, email, password, phone_number) VALUES (?,?,?,?,?);",
-        [fullname, username, email, hashedPassword, phonenumber]
+        "INSERT INTO users (fullname, username, email, password) VALUES (?,?,?,?);",
+        [fullname, username, email, hashedPassword]
       );
       res.status(201).send("OK!");
     }
