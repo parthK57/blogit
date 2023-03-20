@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const loginUser = async (e: any) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ const LoginForm = () => {
           password,
         },
       });
-      if (status === 200) alert("Logging In!");
+      if (status === 200) navigate("/explore");
     } catch (error: any) {
       console.log(error);
       alert(`Error: ${error.response.data}`);
@@ -48,7 +50,7 @@ const LoginForm = () => {
       <div className="mt-3 flex w-[100%] items-center gap-8 text-center text-lg">
         <button
           onClick={loginUser}
-          className="mt-2 rounded-lg bg-blue-700 py-1 px-3 text-white transition-all duration-300 ease-in-out hover:bg-yellow-400"
+          className="mt-2 rounded-lg bg-blue-700 py-1 px-3 text-white md:transition-all md:duration-300 md:ease-in-out md:hover:bg-yellow-400"
         >
           Login
         </button>

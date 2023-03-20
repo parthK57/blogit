@@ -1,6 +1,6 @@
 # DOCUMENTARY
 
-This code is documented on [Blog](https://dev.to/parthk57). You can see my blogs about this project.
+This code is documented on [DEV](https://dev.to/parthk57). You can see my blogs about this project.
 Have a Gooday!
 
 ##### Day 5
