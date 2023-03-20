@@ -1,4 +1,5 @@
-import { ImBlog } from "react-icons/im";
+import { BsGlobeAmericas } from "react-icons/bs";
+import { AiFillLock } from "react-icons/ai";
 
 const Blog = () => {
   return (
@@ -7,17 +8,21 @@ const Blog = () => {
         <div className="max-w-fit rounded-[15px] bg-sky-100 p-3 text-3xl md:p-5">
           Indian Butter Chicken
         </div>
-        <div className="mt-3 h-[40vh] w-[100%] rounded-md bg-[url('/home/parth/Projects/Blogs/frontend/src/assets/indian-butter-chicken.jpg')] bg-contain bg-center bg-no-repeat md:bg-cover" />
-        <div className="mt-3 flex h-[40vh] w-[100%] flex-col overflow-y-scroll">
-          <div className="flex items-center justify-between border-b border-black p-3 font-Sono text-4xl">
+
+        <div className="flex justify-center">
+          <div className="mt-3 h-[40vh] w-[100%] rounded-md bg-[url('/home/parth/Projects/Blogs/frontend/src/assets/indian-butter-chicken.jpg')] bg-contain bg-center bg-no-repeat transition-all duration-500 ease-in-out hover:w-[100%] md:w-[85%] md:bg-cover" />
+        </div>
+        <div className="mt-3 flex h-[80vh] w-[100%] flex-col overflow-y-scroll">
+          <div className="flex items-end justify-between border-b border-black p-3 font-Sono text-4xl">
             <h1 className="p-3 font-Sono text-4xl tracking-tighter">
               Parth's Receipy
             </h1>
-            <h1 className="p-3 text-4xl">
-              <ImBlog />
-            </h1>
+            <p className="flex items-center gap-2 p-3 text-base">
+              24/6/23
+              <BsGlobeAmericas className="text-green-500" />
+            </p>
           </div>
-          <h3 className="mt-2 p-1 font-Sono text-xl text-slate-800">
+          <h3 className="mt-2 p-1 font-Sono text-xl text-slate-600">
             Sub-Heading
           </h3>
           <p className="mt-3 font-Sono">
