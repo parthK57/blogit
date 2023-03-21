@@ -1,7 +1,12 @@
+import { useState } from "react";
 import NavbarHome from "../../components/Navbar/NavbarHome";
 import Sidebar from "./Sidebar";
+import AllBlogCards from "./AllBlogCards";
+import AllBlogsGrid from "./AllBlogsGrid";
 
 const Home = () => {
+  const [allBlogCardsToggle, setAllBlogCardsToggle] = useState(false);
+
   return (
     <>
       <div className="flex h-screen w-screen flex-col">
@@ -13,37 +18,25 @@ const Home = () => {
               <h1 className="w-max rounded-lg bg-sky-50 p-3 text-xl">
                 My Blogs
               </h1>
-              <div className="hidden h-[230px] w-[100%] lg:relative lg:flex">
-                <div className="flex h-[100%] w-[25%] items-center justify-center rounded-xl border border-blue-100 bg-sky-50 shadow-sm lg:absolute">
-                  Blog 0
-                </div>
-                <div className="left-20 flex h-[100%] w-[25%] items-center justify-center rounded-xl border border-blue-100 bg-sky-50 shadow-sm lg:absolute">
-                  Blog 1
-                </div>
-                <div className="left-40 flex h-[100%] w-[25%] items-center justify-center rounded-xl border border-blue-100 bg-sky-50 shadow-sm lg:absolute">
-                  Blog 2
-                </div>
-                <div className="left-60 flex h-[100%] w-[25%] items-center justify-center rounded-xl border border-blue-100 bg-sky-50 shadow-sm lg:absolute">
-                  Blog 3
-                </div>
-                <div className="left-80 flex h-[100%] w-[25%] items-center justify-center rounded-xl border border-blue-100 bg-sky-50 shadow-sm lg:absolute">
-                  Blog 3
-                </div>
-              </div>
+              {/*TODO: USE REDUX AND CREATE A CARDS TOGGLER INSTEAD OF USESTATE */}
+              {allBlogCardsToggle && <AllBlogCards />}
+              {!allBlogCardsToggle && <AllBlogsGrid />}
               <div className="hidden">
                 {/* TODO: REACT CAROUSEL FOR MOBILE */}
               </div>
-              <div className="mt-20 flex w-[100%] justify-center gap-6">
-                <button className="ease w-max rounded-lg bg-lime-200 px-3 py-2 text-lg transition-all duration-500 hover:bg-lime-300">
-                  Create
-                </button>
-                <button className="ease w-max rounded-lg bg-yellow-200 px-3 py-2 text-lg transition-all duration-500 hover:bg-amber-300">
-                  Update
-                </button>
-                <button className="ease w-max rounded-lg bg-red-300 px-3 py-2 text-lg transition-all duration-500 hover:bg-red-500">
-                  Delete
-                </button>
-              </div>
+              {allBlogCardsToggle && (
+                <div className="mt-20 flex w-[100%] justify-center gap-6">
+                  <button className="ease w-max rounded-lg bg-lime-200 px-3 py-2 text-lg transition-all duration-500 hover:bg-lime-300">
+                    Create
+                  </button>
+                  <button className="ease w-max rounded-lg bg-yellow-200 px-3 py-2 text-lg transition-all duration-500 hover:bg-amber-300">
+                    Update
+                  </button>
+                  <button className="ease w-max rounded-lg bg-red-300 px-3 py-2 text-lg transition-all duration-500 hover:bg-red-500">
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
