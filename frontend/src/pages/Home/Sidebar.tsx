@@ -16,33 +16,33 @@ const Sidebar = () => {
           </div>
           <div className="flex w-[100%] gap-4 px-2 pb-1 transition-all duration-200 ease-in-out hover:scale-105">
             <span>Name:</span>
-            <span className="hover:text-lime-700">Parth Kolgiri</span>
+            <span className="hover:text-blue-700">Parth Kolgiri</span>
           </div>
           <div className="flex w-[100%] gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
             <span>Title:</span>
-            <span className="hover:text-lime-700">Full Stack Dev</span>
+            <span className="hover:text-blue-700">Full Stack Dev</span>
           </div>
           <div className="flex w-[100%] gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
             <span>Age:</span>
-            <span className="hover:text-lime-700">22</span>
+            <span className="hover:text-blue-700">22</span>
           </div>
           <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
             <span>
               <HiBuildingOffice2 />
             </span>
-            <span className="hover:text-lime-700">Engineering</span>
+            <span className="hover:text-blue-700">Engineering</span>
           </div>
           <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
             <span>
               <HiLocationMarker />
             </span>
-            <span className="hover:text-lime-700">Solapur, India</span>
+            <span className="hover:text-blue-700">Solapur, India</span>
           </div>
           <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
             <span>
               <AiFillGithub className="text-lg" />
             </span>
-            <span className="hover:text-lime-700">pathK57</span>
+            <span className="hover:text-blue-700">pathK57</span>
           </div>
         </div>
       </div>
