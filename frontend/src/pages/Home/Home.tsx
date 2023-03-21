@@ -9,7 +9,7 @@ const Home = () => {
         <div className="flex h-[calc(100vh-80px)] w-screen items-center gap-10 overflow-y-scroll">
           <Sidebar />
           <div className="mt-10 flex h-[calc(100vh-80px)] flex-col items-center gap-20 overflow-y-scroll md:w-[75%]">
-            <div className="flex w-[100%] h-[100%] flex-col justify-around gap-8 p-5">
+            <div className="flex h-[100%] w-[100%] flex-col gap-8 p-5">
               <h1 className="w-max rounded-lg bg-sky-50 p-3 text-xl">
                 My Blogs
               </h1>
@@ -33,14 +33,14 @@ const Home = () => {
               <div className="hidden">
                 {/* TODO: REACT CAROUSEL FOR MOBILE */}
               </div>
-              <div className="w-[100%] justify-center flex gap-6">
-                <button className="w-max rounded-lg bg-lime-200 px-3 py-2 text-lg hover:bg-lime-300">
+              <div className="mt-20 flex w-[100%] justify-center gap-6">
+                <button className="ease w-max rounded-lg bg-lime-200 px-3 py-2 text-lg transition-all duration-500 hover:bg-lime-300">
                   Create
                 </button>
-                <button className="w-max rounded-lg bg-yellow-200 px-3 py-2 text-lg hover:bg-amber-300">
+                <button className="ease w-max rounded-lg bg-yellow-200 px-3 py-2 text-lg transition-all duration-500 hover:bg-amber-300">
                   Update
                 </button>
-                <button className="w-max rounded-lg bg-red-300 px-3 py-2 text-lg hover:bg-red-500">
+                <button className="ease w-max rounded-lg bg-red-300 px-3 py-2 text-lg transition-all duration-500 hover:bg-red-500">
                   Delete
                 </button>
               </div>
