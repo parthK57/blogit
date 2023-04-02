@@ -5,7 +5,7 @@ import AllBlogCards from "./AllBlogCards";
 import AllBlogsGrid from "./AllBlogsGrid";
 
 const Home = () => {
-  const [allBlogCardsToggle, setAllBlogCardsToggle] = useState(false);
+  const [allBlogCardsToggle, setAllBlogCardsToggle] = useState(true);
 
   return (
     <>

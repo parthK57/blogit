@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import MiniBlog from "../../components/MiniBlog";
-import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const AllBlogsGrid = () => {
   return (
