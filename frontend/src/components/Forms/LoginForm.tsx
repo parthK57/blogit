@@ -13,7 +13,7 @@ const LoginForm = () => {
       const { status } = await axios({
         method: "post",
         url: "http://localhost:4000/login",
-        data: {
+        headers: {
           username,
           password,
         },

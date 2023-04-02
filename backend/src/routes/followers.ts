@@ -1,12 +1,17 @@
 import { Router } from "express";
 
-const followersRouter = Router();
+const followersRoute = Router();
 
 // SERVICES
 import { Authenticator } from "../Services/Authenticator";
 
 // CONTROLLERS
+import {
+  followUserHandler,
+  getFollowersHandler,
+} from "../controllers/followers";
 
-followersRouter.post("/follow", Authenticator)
+followersRoute.post("/follow", Authenticator, followUserHandler);
+followersRoute.get("/followers", Authenticator, getFollowersHandler);
 
-export default followersRouter;
+export default followersRoute;

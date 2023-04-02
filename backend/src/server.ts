@@ -9,8 +9,10 @@ app.use(bodyParser.json());
 
 // ROUTES
 import userRoute from "./routes/users";
+import followersRoute from "./routes/followers";
 
 app.use(userRoute);
+app.use(followersRoute);
 
 // ERROR HANDLING
 app.use((error: ErrorHandler, req: any, res: any, next: any) => {

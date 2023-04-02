@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const registerUser = async (e: any) => {
     e.preventDefault();
@@ -21,7 +23,10 @@ const SignUpForm = () => {
           password,
         },
       });
-      if (status === 201) alert("New ID created!");
+      if (status === 201) {
+        alert("New ID created!");
+        navigate("/login");
+      }
     } catch (error: any) {
       alert(`Error: ${error.response.data}`);
     }

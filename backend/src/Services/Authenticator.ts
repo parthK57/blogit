@@ -4,13 +4,13 @@ import { Decrypter } from "./Bcrypt";
 import ErrorHandler from "./ErrorHandler";
 
 export const Authenticator = async (req: any, res: any, next: any) => {
-  const body: loginBody = req.body;
-  const username = body.username;
-  const password = body.password;
+  const header: loginBody = req.headers;
+  const username = header.username;
+  const password = header.password;
 
   try {
     const [userData] = (await db.execute(
-      "SELECT password FROM users WHERE username = ?;",
+      "SELECT password FROM users WHERE user_name = ?;",
       [username]
     )) as any;
     // NO USER FOUND

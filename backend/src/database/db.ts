@@ -4,7 +4,7 @@ import bluebird from "bluebird";
 const db = mysql.createPool({
   host: "localhost",
   password: "Password@2603",
-  database: "blogs",
+  database: "blogit",
   user: "root",
   Promise: bluebird,
 });
