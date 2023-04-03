@@ -10,9 +10,11 @@ app.use(bodyParser.json());
 // ROUTES
 import userRoute from "./routes/users";
 import followersRoute from "./routes/followers";
+import blogsRoute from "./routes/blogs";
 
 app.use(userRoute);
 app.use(followersRoute);
+app.use(blogsRoute);
 
 // ERROR HANDLING
 app.use((error: ErrorHandler, req: any, res: any, next: any) => {
