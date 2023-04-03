@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setUserData } from "../../slices/UserSlice";
+import { setFollowers } from "../../slices/FollowersSlice";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -9,16 +11,39 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const getUserData = async (e: any) => {
-    e.preventDefault();
-
+  const getUserData = async () => {
     try {
-      const resp = await axios({
+      // GET USER DATA
+      const userDataReq = await axios({
         method: "get",
-        url: "http://localhost:4000/"
-      })
+        url: "http://localhost:4000/user",
+        headers: {
+          username,
+          password,
+        },
+      });
+      if (userDataReq.status === 200) dispatch(setUserData(userDataReq.data));
     } catch (error: any) {
       alert(error.message);
+      console.log(error);
+    }
+  };
+
+  const getFollowers = async () => {
+    try {
+      // GET FOLLOWERS DATA
+      const followersDataReq = await axios({
+        method: "get",
+        url: "http://localhost:4000/followers",
+        headers: {
+          username,
+          password,
+        },
+      });
+      if (followersDataReq?.status === 200)
+        dispatch(setFollowers(followersDataReq?.data));
+    } catch (error: any) {
+      alert("Something went wrong!");
       console.log(error);
     }
   };
@@ -35,6 +60,8 @@ const LoginForm = () => {
         },
       });
       if (status === 200) {
+        await getUserData();
+        await getFollowers();
         navigate("/explore");
       }
     } catch (error: any) {

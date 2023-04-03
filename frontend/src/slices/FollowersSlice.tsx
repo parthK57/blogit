@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // TYPES
 export type follower = {
-  username: string;
+  user_name: string;
+  full_name: string;
 };
 export type followersArray = follower[];
 

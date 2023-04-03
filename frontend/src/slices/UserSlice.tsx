@@ -20,14 +20,14 @@ export type userObject = {
 export const UserSlice = createSlice({
   name: "user",
   initialState: {
-    value: {} as userObject,
+    value: [] as userObject[],
   },
   reducers: {
     setUserData: (state, action) => {
-      state.value = action.payload as userObject;
+      state.value = action.payload as userObject[];
     },
     clearUserData: (state) => {
-      state.value = {} as userObject;
+      state.value = {} as userObject[];
     },
   },
 });

@@ -10,6 +10,6 @@ import { Authenticator } from "../Services/Authenticator";
 
 userRoute.post("/login", Authenticator, loginHandler);
 userRoute.post("/signup", signUpHandler);
-userRoute.get("/", Authenticator, getUserDataHandler);
+userRoute.get("/user", Authenticator, getUserDataHandler);
 
 export default userRoute;
