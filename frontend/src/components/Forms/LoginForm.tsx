@@ -1,11 +1,27 @@
-import axios from "axios";
 import { useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const getUserData = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const resp = await axios({
+        method: "get",
+        url: "http://localhost:4000/"
+      })
+    } catch (error: any) {
+      alert(error.message);
+      console.log(error);
+    }
+  };
 
   const loginUser = async (e: any) => {
     e.preventDefault();
@@ -18,12 +34,15 @@ const LoginForm = () => {
           password,
         },
       });
-      if (status === 200) navigate("/explore");
+      if (status === 200) {
+        navigate("/explore");
+      }
     } catch (error: any) {
       console.log(error);
       alert(`Error: ${error.response.data}`);
     }
   };
+
   return (
     <form className="flex w-[85%] scale-95 flex-col gap-1 overflow-hidden rounded-[20px] bg-blue-100 p-5 sm:w-[55%] md:w-[75%] md:scale-90 lg:w-[50%] lg:scale-100">
       <div className="mt-3 flex w-[100%] items-center justify-center rounded-[25px] bg-blue-200 py-4 text-2xl text-black">

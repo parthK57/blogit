@@ -35,3 +35,17 @@ export const signUpHandler = async (req: any, res: any, next: any) => {
     next(new ErrorHandler(error.messsage, 500));
   }
 };
+
+export const getUserDataHandler = async (req: any, res: any, next: any) => {
+  const username = req.headers.username as string;
+
+  try {
+    const [userData] = await db.execute(
+      "SELECT user_name, full_name, title, age, location, education, profile_picture, facebook, instagram, twitter, github, gitlab, linkedin FROM users WHERE user_name = ?;",
+      [username]
+    );
+    res.status(200).json(userData);
+  } catch (error: any) {
+    return next(new ErrorHandler("Server error!", 500));
+  }
+};
