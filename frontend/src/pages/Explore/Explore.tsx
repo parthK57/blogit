@@ -1,8 +1,59 @@
+import { useEffect, useLayoutEffect } from "react";
 import Blog from "../../components/Blog";
 import NavbarHome from "../../components/Navbar/NavbarHome";
 import Sidebar from "./Sidebar";
 
+import { setUserData } from "../../slices/UserSlice";
+import { setFollowers } from "../../slices/FollowersSlice";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
 const Explore = () => {
+  const dispatch = useDispatch();
+  const username = localStorage.getItem("username") as string;
+  const password = localStorage.getItem("password") as string;
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        // GET USER DATA
+        const userDataReq = await axios({
+          method: "get",
+          url: "http://localhost:4000/user",
+          headers: {
+            username,
+            password,
+          },
+        });
+        if (userDataReq.status === 200) dispatch(setUserData(userDataReq.data));
+      } catch (error: any) {
+        alert(error.message);
+        console.log(error);
+      }
+    };
+    getUserData();
+
+    const getFollowers = async () => {
+      try {
+        // GET FOLLOWERS DATA
+        const followersDataReq = await axios({
+          method: "get",
+          url: "http://localhost:4000/followers",
+          headers: {
+            username,
+            password,
+          },
+        });
+        if (followersDataReq?.status === 200)
+          dispatch(setFollowers(followersDataReq?.data));
+      } catch (error: any) {
+        alert("Something went wrong!");
+        console.log(error);
+      }
+    };
+    getFollowers();
+  }, []);
+
   return (
     <>
       <div className="flex h-screen w-screen flex-col">

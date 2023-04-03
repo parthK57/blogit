@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // TYPES
 export type userObject = {
-  userName: string;
-  fullName: string;
+  user_name: string;
+  full_name: string;
   title: string;
   age: string;
   location: string;
   education: string;
-  profilePicture: string;
+  profile_picture: string;
   facebook: string;
   instagram: string;
   twitter: string;

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // TYPES
 export type notification = {
   notification: string;
+  blog_title: string;
   type: string;
   timestamp: string;
 };
