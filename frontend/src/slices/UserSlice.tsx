@@ -17,7 +17,7 @@ let userObject = {
 };
 
 export const UserSlice = createSlice({
-  name: "userSlice",
+  name: "user",
   initialState: {
     value: userObject,
   },
