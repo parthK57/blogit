@@ -1,32 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let userObject = {
-  userName: "",
-  fullName: "",
-  title: "",
-  age: "",
-  location: "",
-  education: "",
-  profilePicture: "",
-  facebook: "",
-  instagram: "",
-  twitter: "",
-  linkedIn: "",
-  github: "",
-  gitlab: "",
+// TYPES
+export type userObject = {
+  userName: string;
+  fullName: string;
+  title: string;
+  age: string;
+  location: string;
+  education: string;
+  profilePicture: string;
+  facebook: string;
+  instagram: string;
+  twitter: string;
+  linkedIn: string;
+  github: string;
+  gitlab: string;
 };
 
 export const UserSlice = createSlice({
   name: "user",
   initialState: {
-    value: userObject,
+    value: {} as userObject,
   },
   reducers: {
     setUserData: (state, action) => {
-      state.value = action.payload;
+      state.value = action.payload as userObject;
     },
     clearUserData: (state) => {
-      state.value = userObject;
+      state.value = {} as userObject;
     },
   },
 });

@@ -1,29 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let blogsArray = [
-  {
-    id: "",
-    title: "",
-    content: "",
-    image: "",
-    blogsStatus: "",
-    dateCreated: "",
-    upVotes: "",
-    downVotes: "",
-  },
-];
+// TYPES
+export type blog = {
+  id: string;
+  title: string;
+  content: string;
+  image: string;
+  blogsStatus: string;
+  dateCreated: string;
+  upVotes: string;
+  downVotes: string;
+};
+export type blogsArray = blog[];
 
 export const BlogsSlice = createSlice({
   name: "blogs",
   initialState: {
-    value: blogsArray,
+    value: [] as blogsArray,
   },
   reducers: {
     setBlogs: (state, action) => {
-      state.value = action.payload;
+      state.value = action.payload as blogsArray;
     },
     clearBlogs: (state) => {
-      state.value = blogsArray;
+      state.value = [] as blogsArray;
     },
   },
 });

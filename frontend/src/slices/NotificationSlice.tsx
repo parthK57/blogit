@@ -1,25 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let notificationsArray = [
-  {
-    notification: "",
-    type: "",
-    timestamp: "",
-  },
-];
+// TYPES
+export type notification = {
+  notification: string;
+  type: string;
+  timestamp: string;
+};
+export type notificationsArray = notification[];
 
 export const NotificationSlice = createSlice({
   name: "notifications",
   initialState: {
-    value: notificationsArray,
+    value: [] as notificationsArray,
   },
   reducers: {
     setNotifications: (state, action) => {
-      state.value = action.payload;
+      state.value = action.payload as notificationsArray;
     },
 
     clearNotifications: (state) => {
-      state.value = notificationsArray;
+      state.value = [] as notificationsArray;
     },
   },
 });
