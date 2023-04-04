@@ -2,9 +2,22 @@ import ErrorHandler from "../Services/ErrorHandler";
 import db from "../database/db";
 import { Encrypter } from "../Services/Bcrypt";
 import { signUpBody } from "../modals/users";
+import TimeStamp from "../Services/TimeStamp";
 
-export const loginHandler = (req: any, res: any, next: any) => {
-  res.status(200).send("OK!");
+export const loginHandler = async (req: any, res: any, next: any) => {
+  const username = req.headers.username as string;
+
+  const timestamp = TimeStamp();
+
+  try {
+    await db.execute("UPDATE users SET last_active = ? WHERE user_name = ?;", [
+      timestamp,
+      username,
+    ]);
+    res.status(200).send("OK!");
+  } catch (error: any) {
+    next("Server error!", 500);
+  }
 };
 
 export const signUpHandler = async (req: any, res: any, next: any) => {
