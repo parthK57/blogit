@@ -7,7 +7,9 @@ export const FilterSlice = createSlice({
   },
   reducers: {
     setFilters: (state, action) => {
-      state.value.push(action.payload.map((filter: string) => filter));
+      action.payload.forEach((filter: string) => {
+        state.value.push(filter);
+      });
     },
     clearFilter: (state, action) => {
       state.value.forEach((filter: string, index: number) => {
