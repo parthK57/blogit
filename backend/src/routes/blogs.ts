@@ -10,6 +10,7 @@ import {
   createBlogHandler,
   downVoteHandler,
   getBlogsHandler,
+  getRandomFollowersBlogs,
   getRandomPublicBlogs,
   upVoteHandler,
   updateBlogHandler,
@@ -21,5 +22,6 @@ blogsRoute.patch("/blogs/update", Authenticator, updateBlogHandler);
 blogsRoute.patch("/blogs/upvote", Authenticator, upVoteHandler);
 blogsRoute.patch("/blogs/downvote", Authenticator, downVoteHandler);
 blogsRoute.get("/blogs/public/getrandom", Authenticator, getRandomPublicBlogs);
+blogsRoute.get("/blogs/followers/getrandom", Authenticator, getRandomFollowersBlogs);
 
 export default blogsRoute;

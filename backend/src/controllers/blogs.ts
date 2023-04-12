@@ -126,3 +126,32 @@ export const getRandomPublicBlogs = async (req: any, res: any, next: any) => {
     next(new ErrorHandler("Server Error!", 500));
   }
 };
+
+export const getRandomFollowersBlogs = async (
+  req: any,
+  res: any,
+  next: any
+) => {
+  const user_name = req.headers.username as string;
+
+  try {
+    // GET USER ID
+    const [userData] = (await db.execute(
+      "SELECT id FROM users WHERE user_name = ?;",
+      [user_name]
+    )) as any;
+    const userId = userData[0].id as number;
+
+    // GET RANDOM BLOGS FROM FOLLOWERS
+    const [randomBlogsData] =
+      await db.execute(`SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.blog_status, 
+    blogs.date_created, blogs.up_votes, blogs.down_votes FROM blogs 
+    inner join followers on (followers.user1 = blogs.user_name) 
+    where followers.user1 = ${userId} or followers.user2 = ${userId} ORDER BY blogs.id DESC LIMIT 25;`);
+
+    res.status(200).json(randomBlogsData);
+  } catch (error: any) {
+    if (error.statusCode) return next(error);
+    else return next(new ErrorHandler("Server Error!", 500));
+  }
+};
