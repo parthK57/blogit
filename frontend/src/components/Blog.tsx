@@ -4,7 +4,7 @@ import { AiFillLock } from "react-icons/ai";
 const Blog = () => {
   return (
     <>
-      <div className="h-auto w-[90%] rounded-lg bg-blue-100 p-5 shadow md:w-[60%]">
+      <div className="h-auto w-[90%] rounded-lg bg-blue-100 p-5 shadow md:w-[80%] lg:w-[70%] xl:w-[60%]">
         <div className="max-w-fit rounded-[15px] bg-blue-300 p-3 text-3xl md:p-5">
           Indian Butter Chicken
         </div>

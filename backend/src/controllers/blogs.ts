@@ -114,3 +114,15 @@ export const downVoteHandler = async (req: any, res: any, next: any) => {
     return next(new ErrorHandler("Server error!", 500));
   }
 };
+
+export const getRandomPublicBlogs = async (req: any, res: any, next: any) => {
+  try {
+    // GETTING RANDOM BLOGS
+    const [randomBlogsData] = (await db.execute(
+      "SELECT id, title, content, image, blog_status, date_created, up_votes, down_votes, user_name FROM blogs ORDER by id DESC LIMIT 25;"
+    )) as any;
+    res.status(200).json(randomBlogsData);
+  } catch (error: any) {
+    next(new ErrorHandler("Server Error!", 500));
+  }
+};
