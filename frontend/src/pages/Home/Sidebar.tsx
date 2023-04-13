@@ -70,46 +70,46 @@ const Sidebar = () => {
               {userData?.location !== null ? userData?.location : "No Data"}
             </span>
           </div>
-          <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
-            <span>
-              <AiFillGithub className="text-lg text-gray-600" />
-            </span>
-            <span className="hover:text-blue-700">
-              {userData?.github !== null ? userData?.github : "No Data"}
-            </span>
-          </div>
-          <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
-            <span>
-              <AiFillGitlab className="text-lg text-[#fca326]" />
-            </span>
-            <span className="hover:text-blue-700">
-              {userData?.gitlab !== null ? userData?.gitlab : "No Data"}
-            </span>
-          </div>
-          <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
-            <span>
-              <AiFillFacebook className="text-lg text-[#4267B2]" />
-            </span>
-            <span className="hover:text-blue-700">
-              {userData?.facebook !== null ? userData?.facebook : "No Data"}
-            </span>
-          </div>
-          <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
-            <span>
-              <AiFillInstagram className="text-lg text-[#da4391]" />
-            </span>
-            <span className="hover:text-blue-700">
-              {userData?.instagram !== null ? userData?.instagram : "No Data"}
-            </span>
-          </div>
-          <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
-            <span>
-              <AiFillTwitterSquare className="text-lg text-[#1DA1F2]" />
-            </span>
-            <span className="hover:text-blue-700">
-              {userData?.twitter !== null ? userData?.twitter : "No Data"}
-            </span>
-          </div>
+          {userData?.github && (
+            <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
+              <span>
+                <AiFillGithub className="text-lg text-gray-600" />
+              </span>
+              <span className="hover:text-blue-700">{userData?.github}</span>
+            </div>
+          )}
+          {userData?.gitlab && (
+            <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
+              <span>
+                <AiFillGitlab className="text-lg text-[#fca326]" />
+              </span>
+              <span className="hover:text-blue-700">{userData?.gitlab}</span>
+            </div>
+          )}
+          {userData?.facebook && (
+            <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
+              <span>
+                <AiFillFacebook className="text-lg text-[#4267B2]" />
+              </span>
+              <span className="hover:text-blue-700">{userData?.facebook}</span>
+            </div>
+          )}
+          {userData?.instagram && (
+            <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
+              <span>
+                <AiFillInstagram className="text-lg text-[#da4391]" />
+              </span>
+              <span className="hover:text-blue-700">{userData?.instagram}</span>
+            </div>
+          )}
+          {userData?.twitter && (
+            <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
+              <span>
+                <AiFillTwitterSquare className="text-lg text-[#1DA1F2]" />
+              </span>
+              <span className="hover:text-blue-700">{userData?.twitter}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
