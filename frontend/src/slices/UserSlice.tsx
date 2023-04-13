@@ -12,7 +12,7 @@ export type userObject = {
   facebook: string;
   instagram: string;
   twitter: string;
-  linkedIn: string;
+  linkedin: string;
   github: string;
   gitlab: string;
 };

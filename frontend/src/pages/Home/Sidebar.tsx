@@ -8,12 +8,14 @@ import {
   AiFillGithub,
   AiFillGitlab,
   AiFillInstagram,
+  AiFillLinkedin,
   AiFillTwitterSquare,
 } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { HiBuildingOffice2 } from "react-icons/hi2";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { setUserEditModalIsActiveState } from "../../slices/ModalSlice";
+import EditUserDetailsModal from "../Explore/EditUserDetailsModal";
 
 const Sidebar = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -22,7 +24,7 @@ const Sidebar = () => {
   const editUserModalState: boolean = useSelector(
     (state: any) => state.modals.value.userEditModalIsActiveState
   );
-  console.log(editUserModalState);
+
   return (
     <>
       <div className="w hidden flex-col items-center bg-sky-50 md:flex md:h-[calc(100vh-80px)] md:w-[20%]">
@@ -100,6 +102,16 @@ const Sidebar = () => {
                 <span className="hover:text-blue-700">{userData?.gitlab}</span>
               </div>
             )}
+            {userData?.linkedin && (
+              <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
+                <span>
+                  <AiFillLinkedin className="text-lg text-[#0077b5]" />
+                </span>
+                <span className="hover:text-blue-700">
+                  {userData?.linkedin}
+                </span>
+              </div>
+            )}
             {userData?.facebook && (
               <div className="flex w-[100%] items-center gap-2 px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105">
                 <span>
@@ -130,14 +142,7 @@ const Sidebar = () => {
             )}
           </div>
         </div>
-        {editUserModalState && (
-          <div
-            onClick={() => dispatch(setUserEditModalIsActiveState(false))}
-            className="absolute top-0 left-0 flex h-screen w-screen items-center justify-center bg-white/80"
-          >
-            Hola Bitch!
-          </div>
-        )}
+        {editUserModalState && <EditUserDetailsModal />}
       </div>
     </>
   );
