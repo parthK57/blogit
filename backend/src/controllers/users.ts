@@ -106,7 +106,13 @@ export const updateUserDataHandler = async (req: any, res: any, next: any) => {
         userId,
       ]
     );
-    res.status(200).json({ res: "Success!" });
+
+    // GET NEW MODIFIED DATA
+    const [userNewData] = await db.execute(
+      "SELECT user_name, full_name, title, age, location, education, profile_picture, facebook, instagram, twitter, github, gitlab, linkedin FROM users WHERE user_name = ?;",
+      [username]
+    );
+    res.status(200).json(userNewData);
   } catch (error: any) {
     if (error.statusCode) return next(error);
     else return next(new ErrorHandler("Server Error!", 500));

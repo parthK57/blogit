@@ -10,7 +10,7 @@ const Blog = () => {
         </div>
 
         <div className="flex justify-center">
-          <div className="mt-3 h-[40vh] w-[100%] rounded-md bg-[url('/home/parth/Projects/Blogs/frontend/src/assets/indian-butter-chicken.jpg')] bg-contain bg-center bg-no-repeat transition-all duration-500 ease-in-out hover:w-[100%] md:w-[85%] md:bg-cover" />
+          <div className="mt-3 h-[40vh] w-[100%] rounded-md bg-[url('/indian-butter-chicken.jpg')] bg-contain bg-center bg-no-repeat transition-all duration-500 ease-in-out hover:w-[100%] md:w-[85%] md:bg-cover" />
         </div>
         <div className="mt-3 flex h-[80vh] w-[100%] flex-col overflow-y-scroll">
           <div className="flex items-end justify-between border-b border-black p-3 font-Sono text-4xl">

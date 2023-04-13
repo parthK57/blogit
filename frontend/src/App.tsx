@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+
+// COMPONENTS
 import store from "./store";
 
 // ROUTES

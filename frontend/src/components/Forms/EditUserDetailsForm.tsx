@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 // SLICE
-import { userObject } from "../../slices/UserSlice";
+import { setUserData, userObject } from "../../slices/UserSlice";
 import { setUserEditModalIsActiveState } from "../../slices/ModalSlice";
 import { setNotify } from "../../slices/NotifySlice";
 
@@ -26,11 +26,13 @@ const EditUserDetailsForm = () => {
   const [instagram, setInstagram] = useState(userData.instagram);
   const [twitter, setTwitter] = useState(userData.twitter);
 
-  const updateUserDetails = async () => {
+  const updateUserDetails = async (e: any) => {
+    e.preventDefault();
+
     try {
       const response = await axios({
-        method: "",
-        url: "",
+        method: "patch",
+        url: "http://localhost:4000/user/update",
         headers: {
           username: localStorage.getItem("username"),
           password: localStorage.getItem("password"),
@@ -51,10 +53,13 @@ const EditUserDetailsForm = () => {
           twitter,
         },
       });
-      if (response.status === 200)
+      if (response.status === 200) {
         dispatch(
           setNotify({ isActive: true, type: "success", message: "Success!" })
         );
+        dispatch(setUserEditModalIsActiveState(false));
+        dispatch(setUserData(response.data));
+      }
     } catch (error: any) {
       if (error.response.data)
         dispatch(
@@ -211,7 +216,7 @@ const EditUserDetailsForm = () => {
               onClick={updateUserDetails}
               className="mt-2 min-w-[75px] rounded-lg bg-blue-700 py-1 px-3 text-white transition-all duration-300 ease-in-out md:hover:bg-yellow-400"
             >
-              Edit
+              Update
             </button>
             <button
               onClick={() => dispatch(setUserEditModalIsActiveState(false))}

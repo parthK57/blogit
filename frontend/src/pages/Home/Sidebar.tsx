@@ -34,7 +34,7 @@ const Sidebar = () => {
           <div className="relative mt-20 flex w-[90%] flex-col gap-2 rounded-[15px] bg-blue-200 p-4 pt-0 text-[12px] lg:text-base">
             <div className="flex w-[100%] items-center justify-center">
               <div
-                className={`relative -top-7 h-[70px] w-[70px] rounded-full bg-white bg-contain bg-no-repeat p-2 pb-0 md:h-[60px] md:w-[60px]`}
+                className={`relative -top-7 h-[70px] w-[70px] rounded-full bg-[url(${userData?.profile_picture})] bg-contain bg-no-repeat p-2 pb-0 md:h-[60px] md:w-[60px]`}
               />
             </div>
             <div className="absolute top-0 right-0 p-3">
@@ -59,7 +59,7 @@ const Sidebar = () => {
             <span className="-mt-8 border-b border-black py-2 text-xl">
               Details:-
             </span>
-            <div className="flex h-[200px] flex-col gap-1 overflow-y-scroll justify-center rounded-md bg-blue-100 py-1 px-2">
+            <div className="flex h-[200px] flex-col gap-1 overflow-y-scroll rounded-md bg-blue-100 py-1 px-2">
               <div className="flex w-[100%] items-center gap-4 rounded px-2 py-1 transition-all duration-200 ease-in-out hover:scale-105 hover:bg-blue-300">
                 <span>Name:</span>
                 <span className="hover:text-blue-700">
