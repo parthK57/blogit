@@ -9,6 +9,7 @@ import Sidebar from "./Sidebar";
 // SLICES
 import { setFollowers } from "../../slices/FollowersSlice";
 import { setUserData } from "../../slices/UserSlice";
+import Notify from "../../components/Notify";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,9 @@ const Home = () => {
               Item
             </div>
           </div>
-        </div>
+        </div>{
+          true && <Notify type="alert" message="You can't fuck with that!" />
+        }
       </div>
     </>
   );
