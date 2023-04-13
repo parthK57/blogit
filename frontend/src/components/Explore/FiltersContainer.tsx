@@ -11,6 +11,7 @@ import { FaSearch } from "react-icons/fa";
 import { clearFilter, setFilters } from "../../slices/FiltersSlice";
 
 const FiltersContainer = () => {
+  // TODO: Trigger Filter On Enter Key
   const [publicFilter, setPublicFilter] = useState(true);
   const [followersFilter, setFollowersFilter] = useState(false);
   const [tag, setTag] = useState("");

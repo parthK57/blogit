@@ -10,8 +10,8 @@ import {
   createBlogHandler,
   downVoteHandler,
   getBlogsHandler,
-  getRandomFollowersBlogs,
-  getRandomPublicBlogs,
+  getRandomFollowersBlogsHandler,
+  getRandomPublicBlogsHandler,
   upVoteHandler,
   updateBlogHandler,
 } from "../controllers/blogs";
@@ -21,7 +21,7 @@ blogsRoute.post("/blogs/create", Authenticator, createBlogHandler);
 blogsRoute.patch("/blogs/update", Authenticator, updateBlogHandler);
 blogsRoute.patch("/blogs/upvote", Authenticator, upVoteHandler);
 blogsRoute.patch("/blogs/downvote", Authenticator, downVoteHandler);
-blogsRoute.get("/blogs/public/getrandom", Authenticator, getRandomPublicBlogs);
-blogsRoute.get("/blogs/followers/getrandom", Authenticator, getRandomFollowersBlogs);
+blogsRoute.get("/blogs/public/getrandom", Authenticator, getRandomPublicBlogsHandler);
+blogsRoute.get("/blogs/followers/getrandom", Authenticator, getRandomFollowersBlogsHandler);
 
 export default blogsRoute;

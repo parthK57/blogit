@@ -73,16 +73,19 @@ const SignUpForm = () => {
           required
         />
       </div>
-      <div className="mt-3 flex w-[100%] items-center gap-8 text-center text-lg">
+      <div className="mt-3 flex w-[100%] items-center gap-7 text-center text-lg">
         <button
           onClick={registerUser}
-          className="mt-2 rounded-lg bg-blue-700 py-1 px-3 text-white transition-all duration-300 ease-in-out hover:bg-yellow-400"
+          className="mt-2 rounded-lg bg-blue-700 py-1 px-3 text-white transition-all duration-300 ease-in-out md:hover:bg-yellow-400"
         >
           Sign Up
         </button>
-        <p className="mt-2 transition-all duration-150 ease-in hover:scale-105">
+        <button
+          onClick={() => navigate("/login")}
+          className="mt-2 cursor-pointer rounded-lg bg-gray-50 py-1 px-3 transition-all duration-150 ease-in  md:hover:scale-105"
+        >
           Cancel
-        </p>
+        </button>
       </div>
     </form>
   );

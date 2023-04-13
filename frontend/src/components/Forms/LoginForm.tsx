@@ -52,16 +52,19 @@ const LoginForm = () => {
           required
         />
       </div>
-      <div className="mt-3 flex w-[100%] items-center gap-8 text-center text-lg">
+      <div className="mt-3 flex w-[100%] items-center gap-7 text-center text-lg">
         <button
           onClick={loginUser}
           className="mt-2 rounded-lg bg-blue-700 py-1 px-3 text-white md:transition-all md:duration-300 md:ease-in-out md:hover:bg-yellow-400"
         >
           Login
         </button>
-        <p className="mt-2 transition-all duration-150 ease-in hover:scale-105">
-          Cancel
-        </p>
+        <button
+          onClick={() => navigate("/")}
+          className="mt-2 cursor-pointer rounded-lg bg-gray-50 py-1 px-3 transition-all duration-150 ease-in  md:hover:scale-105"
+        >
+          Sign Up
+        </button>
       </div>
     </form>
   );

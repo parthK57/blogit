@@ -115,7 +115,11 @@ export const downVoteHandler = async (req: any, res: any, next: any) => {
   }
 };
 
-export const getRandomPublicBlogs = async (req: any, res: any, next: any) => {
+export const getRandomPublicBlogsHandler = async (
+  req: any,
+  res: any,
+  next: any
+) => {
   try {
     // GETTING RANDOM BLOGS
     const [randomBlogsData] = (await db.execute(
@@ -127,7 +131,7 @@ export const getRandomPublicBlogs = async (req: any, res: any, next: any) => {
   }
 };
 
-export const getRandomFollowersBlogs = async (
+export const getRandomFollowersBlogsHandler = async (
   req: any,
   res: any,
   next: any
