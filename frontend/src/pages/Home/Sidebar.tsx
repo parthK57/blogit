@@ -14,8 +14,10 @@ import {
 import { HiLocationMarker } from "react-icons/hi";
 import { HiBuildingOffice2 } from "react-icons/hi2";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { setUserEditModalIsActiveState } from "../../slices/ModalSlice";
 import EditUserDetailsModal from "../Explore/EditUserDetailsModal";
+
+// SLICES
+import { setUserEditModalIsActiveState } from "../../slices/ModalSlice";
 
 const Sidebar = () => {
   const [dropDown, setDropDown] = useState(false);

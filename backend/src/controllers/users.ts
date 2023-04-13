@@ -1,7 +1,7 @@
 import ErrorHandler from "../Services/ErrorHandler";
 import db from "../database/db";
 import { Encrypter } from "../Services/Bcrypt";
-import { signUpBody } from "../modals/users";
+import { signUpBody, updateUserData } from "../modals/users";
 import TimeStamp from "../Services/TimeStamp";
 
 export const loginHandler = async (req: any, res: any, next: any) => {
@@ -60,5 +60,55 @@ export const getUserDataHandler = async (req: any, res: any, next: any) => {
     res.status(200).json(userData);
   } catch (error: any) {
     return next(new ErrorHandler("Server error!", 500));
+  }
+};
+
+export const updateUserDataHandler = async (req: any, res: any, next: any) => {
+  const body: updateUserData = req.body;
+  const username = body.username;
+  const fullname = body.fullname;
+  const title = body.title;
+  const age = body.age !== null ? parseInt(body.age) : null;
+  const location = body.location;
+  const education = body.education;
+  const profilePicture = body.profilePicture;
+  const facebook = body.facebook;
+  const instagram = body.instagram;
+  const twitter = body.twitter;
+  const github = body.github;
+  const gitlab = body.gitlab;
+  const linkedin = body.linkedIn;
+
+  try {
+    // GET USER ID
+    const [userData] = (await db.execute(
+      "SELECT id FROM users WHERE user_name = ?;",
+      [username]
+    )) as any;
+    const userId = userData[0].id as number;
+
+    await db.execute(
+      "UPDATE users SET user_name = ?, full_name = ?, title = ?, age = ?, location = ?, education = ?, profile_picture = ?, facebook = ?, instagram = ?, twitter = ?, github = ?, gitlab = ?, linkedin = ? WHERE id = ?;",
+      [
+        username,
+        fullname,
+        title,
+        age,
+        location,
+        education,
+        profilePicture,
+        facebook,
+        instagram,
+        twitter,
+        github,
+        gitlab,
+        linkedin,
+        userId,
+      ]
+    );
+    res.status(200).json({ res: "Success!" });
+  } catch (error: any) {
+    if (error.statusCode) return next(error);
+    else return next(new ErrorHandler("Server Error!", 500));
   }
 };

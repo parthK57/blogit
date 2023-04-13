@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 // SLICE
 import { userObject } from "../../slices/UserSlice";
@@ -23,7 +24,38 @@ const EditUserDetailsForm = () => {
   const [facebook, setFacebook] = useState(userData.facebook);
   const [instagram, setInstagram] = useState(userData.instagram);
   const [twitter, setTwitter] = useState(userData.twitter);
-  // TODO: CREATE UPDATE USER DETAILS FUNCTION
+
+  const updateUserDetails = async () => {
+    try {
+      const response = await axios({
+        method: "",
+        url: "",
+        headers: {
+          username: localStorage.getItem("username"),
+          password: localStorage.getItem("password"),
+        },
+        data: {
+          fullname,
+          username,
+          title,
+          profilePicture,
+          age,
+          education,
+          location,
+          github,
+          gitlab,
+          linkedIn,
+          facebook,
+          instagram,
+          twitter,
+        },
+      });
+      if (response.status === 200) alert("Success!"); // TODO: CREATE A CUSTOM NOTIFICATION
+    } catch (error: any) {
+      alert("Something went wrong!");
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -165,7 +197,10 @@ const EditUserDetailsForm = () => {
             </div>
           </div>
           <div className="mt-3 flex w-[100%] items-center gap-7 text-center text-lg">
-            <button className="mt-2 min-w-[75px] rounded-lg bg-blue-700 py-1 px-3 text-white transition-all duration-300 ease-in-out md:hover:bg-yellow-400">
+            <button
+              onClick={updateUserDetails}
+              className="mt-2 min-w-[75px] rounded-lg bg-blue-700 py-1 px-3 text-white transition-all duration-300 ease-in-out md:hover:bg-yellow-400"
+            >
               Edit
             </button>
             <button
