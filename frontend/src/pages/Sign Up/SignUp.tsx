@@ -1,7 +1,15 @@
+import { useSelector } from "react-redux";
+
+// COMPONENTS
 import Navbar from "../../components/Navbar/Navbar";
 import SignUpForm from "../../components/Forms/SignUpFrom";
+import Notify from "../../components/Notify";
 
 const SignUp = () => {
+  const notifyState: boolean = useSelector(
+    (state: any) => state.notify.value.isActive
+  );
+
   return (
     <>
       <div className="flex h-screen w-screen flex-col">
@@ -14,6 +22,7 @@ const SignUp = () => {
             <SignUpForm />
           </div>
         </div>
+        {notifyState && <Notify />}
       </div>
     </>
   );

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setNotify } from "../../slices/NotifySlice";
 
 const SignUpForm = () => {
   const [fullname, setFullname] = useState("");
@@ -8,27 +10,54 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const registerUser = async (e: any) => {
     e.preventDefault();
 
     try {
-      const { status } = await axios({
-        method: "post",
-        url: "http://localhost:4000/signup",
-        data: {
-          fullname,
-          username,
-          email,
-          password,
-        },
-      });
-      if (status === 201) {
-        alert("New ID created!");
-        navigate("/login");
+      // CHECK FOR EMPTY FEILD
+      if (fullname === "" || username === "" || email === "" || password === "")
+        throw new Error("Please fill feilds!");
+      else {
+        const { status } = await axios({
+          method: "post",
+          url: "http://localhost:4000/signup",
+          data: {
+            fullname,
+            username,
+            email,
+            password,
+          },
+        });
+        if (status === 201) {
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "success",
+              message: "New ID created!",
+            })
+          );
+          navigate("/login");
+        }
       }
     } catch (error: any) {
-      alert(`Error: ${error.response.data}`);
+      if (error.response?.data)
+        dispatch(
+          setNotify({
+            isActive: true,
+            type: "error",
+            message: "Something went wrong!",
+          })
+        );
+      else if (error.message)
+        dispatch(
+          setNotify({
+            isActive: true,
+            type: "error",
+            message: `${error.message}`,
+          })
+        );
     }
   };
 

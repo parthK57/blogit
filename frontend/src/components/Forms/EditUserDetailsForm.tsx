@@ -5,6 +5,7 @@ import axios from "axios";
 // SLICE
 import { userObject } from "../../slices/UserSlice";
 import { setUserEditModalIsActiveState } from "../../slices/ModalSlice";
+import { setNotify } from "../../slices/NotifySlice";
 
 const EditUserDetailsForm = () => {
   const dispatch = useDispatch();
@@ -50,10 +51,19 @@ const EditUserDetailsForm = () => {
           twitter,
         },
       });
-      if (response.status === 200) alert("Success!"); // TODO: CREATE A CUSTOM NOTIFICATION
+      if (response.status === 200)
+        dispatch(
+          setNotify({ isActive: true, type: "success", message: "Success!" })
+        );
     } catch (error: any) {
-      alert("Something went wrong!");
-      console.log(error);
+      if (error.response.data)
+        dispatch(
+          setNotify({
+            isActive: true,
+            type: "error",
+            message: "Something went wrong!",
+          })
+        );
     }
   };
 

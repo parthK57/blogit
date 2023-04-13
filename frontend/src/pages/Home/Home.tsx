@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 // COMPONENTS
@@ -15,6 +15,9 @@ const Home = () => {
   const dispatch = useDispatch();
   const username = localStorage.getItem("username") as string;
   const password = localStorage.getItem("password") as string;
+  const notifyState: boolean = useSelector(
+    (state: any) => state.notify.value.isActive
+  );
 
   useEffect(() => {
     const getUserData = async () => {
@@ -68,9 +71,8 @@ const Home = () => {
               Item
             </div>
           </div>
-        </div>{
-          true && <Notify type="alert" message="You can't fuck with that!" />
-        }
+        </div>
+        {notifyState && <Notify />}
       </div>
     </>
   );

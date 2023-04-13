@@ -1,31 +1,52 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { setNotify } from "../../slices/NotifySlice";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const loginUser = async (e: any) => {
     e.preventDefault();
     try {
-      const { status } = await axios({
-        method: "post",
-        url: "http://localhost:4000/login",
-        headers: {
-          username,
-          password,
-        },
-      });
-      if (status === 200) {
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        navigate("/explore");
+      if (username === "" || password === "")
+        throw new Error("Please fill the feilds!");
+      else {
+        const { status } = await axios({
+          method: "post",
+          url: "http://localhost:4000/login",
+          headers: {
+            username,
+            password,
+          },
+        });
+        if (status === 200) {
+          localStorage.setItem("username", username);
+          localStorage.setItem("password", password);
+          navigate("/explore");
+        }
       }
     } catch (error: any) {
-      console.log(error);
-      alert(`Error: ${error.response.data}`);
+      if (error.response?.data)
+        dispatch(
+          setNotify({
+            isActive: true,
+            type: "error",
+            message: `${error.response.data}`,
+          })
+        );
+      else if (error.message)
+        dispatch(
+          setNotify({
+            isActive: true,
+            type: "error",
+            message: `${error.message}`,
+          })
+        );
     }
   };
 

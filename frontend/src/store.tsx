@@ -7,6 +7,7 @@ import { NotificationSlice } from "./slices/NotificationSlice";
 import { FollowersSlice } from "./slices/FollowersSlice";
 import { FilterSlice } from "./slices/FiltersSlice";
 import { ModalSlice } from "./slices/ModalSlice";
+import { NotifySlice } from "./slices/NotifySlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     followers: FollowersSlice.reducer,
     filters: FilterSlice.reducer,
     modals: ModalSlice.reducer,
+    notify: NotifySlice.reducer,
   },
 });
 
