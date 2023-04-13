@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { userObject } from "../../slices/UserSlice";
+
+// COMPONENTS
 import {
   AiFillFacebook,
   AiFillGithub,
@@ -8,9 +13,6 @@ import {
 import { HiLocationMarker } from "react-icons/hi";
 import { HiBuildingOffice2 } from "react-icons/hi2";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { userObject } from "../../slices/UserSlice";
-import { useSelector } from "react-redux";
-import { useState } from "react";
 
 const Sidebar = () => {
   const userData: userObject = useSelector((state: any) => state.user.value[0]);
