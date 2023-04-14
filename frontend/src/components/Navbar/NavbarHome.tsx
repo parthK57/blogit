@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // COMPONENTS
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -9,6 +9,7 @@ import { setSidebarDisplay } from "../../slices/ModalSlice";
 
 const NavbarHome = () => {
   const [toggleHamburger, setToggleHamburger] = useState(false);
+  const navigate = useNavigate();
   const displayState: string = useSelector(
     (state: any) => state.modals.value.sidebarDispay
   );
@@ -43,14 +44,23 @@ const NavbarHome = () => {
       </div>
       {toggleHamburger && (
         <div className="absolute top-0 left-0 z-10 flex h-screen w-screen flex-col items-center justify-center gap-5 bg-blue-100">
-          <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
-            <Link to="/home">Home</Link>
+          <p
+            onClick={() => navigate("/home")}
+            className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl"
+          >
+            Home
           </p>
-          <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
-            <Link to="/contact">Contact Us</Link>
+          <p
+            onClick={() => navigate("/contact")}
+            className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl"
+          >
+            Contact Us
           </p>
-          <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
-            <Link to="/explore">Explore</Link>
+          <p
+            onClick={() => navigate("/explore")}
+            className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl"
+          >
+            Explore
           </p>
           <p
             onClick={() => {

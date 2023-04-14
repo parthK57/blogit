@@ -1,12 +1,16 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
+// COMPONENTS
 import Blog from "../../components/Blog";
 import NavbarHome from "../../components/Navbar/NavbarHome";
 import Sidebar from "./Sidebar";
+import { setNotify } from "../../slices/NotifySlice";
 
+// SLICES
 import { setUserData } from "../../slices/UserSlice";
 import { setFollowers } from "../../slices/FollowersSlice";
-import { useDispatch } from "react-redux";
-import axios from "axios";
 
 const Explore = () => {
   const dispatch = useDispatch();
@@ -27,8 +31,23 @@ const Explore = () => {
         });
         if (userDataReq.status === 200) dispatch(setUserData(userDataReq.data));
       } catch (error: any) {
-        alert(error.message);
-        console.log(error);
+        if (error.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.message}`,
+            })
+          );
+        else if (error.response.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.response.message}`,
+            })
+          );
+        else console.log(error);
       }
     };
     getUserData();
@@ -47,8 +66,23 @@ const Explore = () => {
         if (followersDataReq?.status === 200)
           dispatch(setFollowers(followersDataReq?.data));
       } catch (error: any) {
-        alert("Something went wrong!");
-        console.log(error);
+        if (error.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.message}`,
+            })
+          );
+        else if (error.response.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.response.message}`,
+            })
+          );
+        else console.log(error);
       }
     };
     getFollowers();
