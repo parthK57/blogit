@@ -15,7 +15,7 @@ export const getBlogsHandler = async (req: any, res: any, next: any) => {
 
     // GET BLOGS
     const [blogData] = (await db.execute(
-      "SELECT id, title, content, image, blog_status, date_created, up_votes, down_votes FROM blogs WHERE user_name = ?;",
+      "SELECT id, title, content, image, blog_status, date_created, up_votes, down_votes, tags FROM blogs WHERE user_name = ?;",
       [userId]
     )) as any;
     res.status(200).json(blogData);
@@ -32,6 +32,7 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
   const content = body.content;
   const blogStatus = body.blogStatus;
   const image = body.image;
+  const tags = body.tags;
 
   const timestamp = TimeStamp();
 
@@ -45,8 +46,8 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
 
     // EXECUTE INSERT
     await db.execute(
-      "INSERT INTO blogs (title, content, blog_status, image, date_created, user_name) VALUES (?,?,?,?,?,?);",
-      [title, content, blogStatus, image, timestamp, userId]
+      "INSERT INTO blogs (title, content, blog_status, image, date_created, user_name, tags) VALUES (?,?,?,?,?,?,?);",
+      [title, content, blogStatus, image, timestamp, userId, tags]
     );
     res.status(201).json({ res: "success" });
   } catch (error: any) {
@@ -62,11 +63,12 @@ export const updateBlogHandler = async (req: any, res: any, next: any) => {
   const content = body.content;
   const image = body.image;
   const blogStatus = body.blogStatus;
+  const tags = body.tags;
 
   try {
     await db.execute(
-      "UPDATE blogs SET title = ?, content = ?, image = ?, blog_status = ? WHERE id = ?;",
-      [title, content, image, blogStatus, blogId]
+      "UPDATE blogs SET title = ?, content = ?, image = ?, blog_status = ?, tags = ? WHERE id = ?;",
+      [title, content, image, blogStatus, blogId, tags]
     );
     res.status(200).json({ res: "success" });
   } catch (error: any) {
@@ -123,7 +125,7 @@ export const getRandomPublicBlogsHandler = async (
   try {
     // GETTING RANDOM BLOGS
     const [randomBlogsData] = (await db.execute(
-      "SELECT id, title, content, image, blog_status, date_created, up_votes, down_votes, user_name FROM blogs ORDER by id DESC LIMIT 25;"
+      "SELECT id, title, content, image, blog_status, date_created, up_votes, down_votes, user_name, tags FROM blogs ORDER by id DESC LIMIT 25;"
     )) as any;
     res.status(200).json(randomBlogsData);
   } catch (error: any) {
@@ -149,7 +151,7 @@ export const getRandomFollowersBlogsHandler = async (
     // GET RANDOM BLOGS FROM FOLLOWERS
     const [randomBlogsData] =
       await db.execute(`SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.blog_status, 
-    blogs.date_created, blogs.up_votes, blogs.down_votes FROM blogs 
+    blogs.date_created, blogs.up_votes, blogs.down_votes, blogs.tags FROM blogs 
     inner join followers on (followers.user1 = blogs.user_name) 
     where followers.user1 = ${userId} or followers.user2 = ${userId} ORDER BY blogs.id DESC LIMIT 25;`);
 

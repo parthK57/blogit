@@ -10,6 +10,8 @@ export type blog = {
   dateCreated: string;
   upVotes: string;
   downVotes: string;
+  tags: string[];
+  createdBy: string;
 };
 export type blogsArray = blog[];
 

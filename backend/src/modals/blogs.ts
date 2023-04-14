@@ -3,6 +3,7 @@ export interface createBlogBody {
   content: string;
   image: string;
   blogStatus: string;
+  tags: string;
 }
 
 export interface updateBlogBody {
@@ -11,4 +12,5 @@ export interface updateBlogBody {
   content: string;
   image: string;
   blogStatus: string;
+  tags: string;
 }
