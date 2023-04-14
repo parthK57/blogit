@@ -27,7 +27,7 @@ export const UserSlice = createSlice({
       state.value = action.payload as userObject[];
     },
     clearUserData: (state) => {
-      state.value = {} as userObject[];
+      state.value = [] as userObject[];
     },
   },
 });

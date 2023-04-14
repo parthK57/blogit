@@ -18,7 +18,6 @@ export const NotificationSlice = createSlice({
     setNotifications: (state, action) => {
       state.value = action.payload as notificationsArray;
     },
-
     clearNotifications: (state) => {
       state.value = [] as notificationsArray;
     },

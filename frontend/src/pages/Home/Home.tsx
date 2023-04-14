@@ -10,6 +10,7 @@ import Sidebar from "./Sidebar";
 import { setFollowers } from "../../slices/FollowersSlice";
 import { setUserData } from "../../slices/UserSlice";
 import Notify from "../../components/Notify";
+import { setNotify } from "../../slices/NotifySlice";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -33,8 +34,23 @@ const Home = () => {
         });
         if (userDataReq.status === 200) dispatch(setUserData(userDataReq.data));
       } catch (error: any) {
-        alert(error.message);
-        console.log(error);
+        if (error.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.message}`,
+            })
+          );
+        else if (error.response.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.response.message}`,
+            })
+          );
+        else console.log(error);
       }
     };
     getUserData();
@@ -53,8 +69,23 @@ const Home = () => {
         if (followersDataReq?.status === 200)
           dispatch(setFollowers(followersDataReq?.data));
       } catch (error: any) {
-        alert("Something went wrong!");
-        console.log(error);
+        if (error.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.message}`,
+            })
+          );
+        else if (error.response.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.response.message}`,
+            })
+          );
+        else console.log(error);
       }
     };
     getFollowers();
@@ -68,7 +99,8 @@ const Home = () => {
           <Sidebar />
           <div className="mt-10 flex h-[calc(100vh-80px)] flex-col items-center gap-20 overflow-y-scroll md:w-[75%]">
             <div className="flex h-[100%] w-[100%] flex-col gap-8 p-5">
-              <span>Home</span>
+              {/* // TODO: CREATE A COMPONENT FOR VIEWING ALL THE USER BLOGS */}
+              <div className="h-[90%] w-full bg-blue-100">Hello</div>
             </div>
           </div>
         </div>

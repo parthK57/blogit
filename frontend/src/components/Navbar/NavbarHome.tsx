@@ -23,13 +23,10 @@ const NavbarHome = () => {
             <Link to="/home">Home</Link>
           </p>
           <p className="pointer-events-auto cursor-pointer">
-            <Link to="/account">Account</Link>
-          </p>
-          <p className="pointer-events-auto cursor-pointer">
-            <Link to="/contact">Contact</Link>
-          </p>
-          <p className="pointer-events-auto cursor-pointer">
             <Link to="/explore">Explore</Link>
+          </p>
+          <p className="pointer-events-auto cursor-pointer">
+            <Link to="/contact">Contact Us</Link>
           </p>
         </div>
         <RxHamburgerMenu
@@ -43,10 +40,7 @@ const NavbarHome = () => {
             <Link to="/home">Home</Link>
           </p>
           <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
-            <Link to="/account">Account</Link>
-          </p>
-          <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
-            <Link to="/account">Account</Link>
+            <Link to="/contact">Contact Us</Link>
           </p>
           <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
             <Link to="/explore">Explore</Link>
