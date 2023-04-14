@@ -7,6 +7,18 @@ This web-app is created with following tech-stack:-
 - MySQL
 - SendGrid
 
+#### Login Page
+
+![Login Page](./frontend/public/LoginPage.png)
+
+#### Sign Up Page
+
+![Sign Up Page](./frontend/public/SignUpPage.png)
+
+#### Explore Page
+
+![Explore Page](./frontend/public/ExplorePage.png)
+
 ##### Schema
 
 ```sql
