@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+// TYPES
 import { userObject } from "../../slices/UserSlice";
 
 // COMPONENTS
@@ -23,9 +25,7 @@ const InfoTab = () => {
   const [dropDown, setDropDown] = useState(false);
   const dispatch = useDispatch();
   const userData: userObject = useSelector((state: any) => state.user.value[0]);
-  const editUserModalState: boolean = useSelector(
-    (state: any) => state.modals.value.userEditModalIsActiveState
-  );
+  
   return (
     <>
       <div className="flex w-[100%] items-center justify-center">

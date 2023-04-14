@@ -5,8 +5,8 @@ import ErrorHandler from "./ErrorHandler";
 
 export const Authenticator = async (req: any, res: any, next: any) => {
   const header: loginBody = req.headers;
-  const username = header.username;
-  const password = header.password;
+  const username = header?.username;
+  const password = header?.password;
 
   try {
     const [userData] = (await db.execute(

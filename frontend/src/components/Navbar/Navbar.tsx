@@ -10,8 +10,8 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex h-[80px] w-screen items-center justify-between bg-blue-100 px-4">
-        <div className="flex items-center rounded-md bg-blue-200 px-2 py-1 text-2xl transition-all duration-300 ease-in-out hover:scale-110">
+      <div className="flex h-[80px] w-screen items-center justify-between bg-blue-200 px-4">
+        <div className="flex items-center rounded-md bg-blue-300 px-2 py-1 text-2xl transition-all duration-300 ease-in-out hover:scale-110">
           <p>
             <Link style={{ fontFamily: "Sono" }} to="/">
               blogit

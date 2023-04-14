@@ -1,11 +1,18 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+// COMPONENTS
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { setSidebarDisplay } from "../../slices/ModalSlice";
 
 const NavbarHome = () => {
   const [toggleHamburger, setToggleHamburger] = useState(false);
-
+  const displayState: string = useSelector(
+    (state: any) => state.modals.value.sidebarDispay
+  );
+  const dispatch = useDispatch();
   const toggler = () => setToggleHamburger(!toggleHamburger);
 
   return (
@@ -44,6 +51,20 @@ const NavbarHome = () => {
           </p>
           <p className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl">
             <Link to="/explore">Explore</Link>
+          </p>
+          <p
+            onClick={() => {
+              if (displayState === "hidden") {
+                dispatch(setSidebarDisplay("block"));
+                toggler();
+              } else {
+                dispatch(setSidebarDisplay("hidden"));
+                toggler();
+              }
+            }}
+            className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl"
+          >
+            Account
           </p>
           <div className="pointer-events-auto mt-8 flex cursor-pointer items-center justify-center rounded-full bg-blue-200 p-2 text-4xl">
             <IoClose onClick={toggler} />
