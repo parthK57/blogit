@@ -12,6 +12,8 @@ import Notify from "../../components/Notify";
 import { setFollowers } from "../../slices/FollowersSlice";
 import { setUserData } from "../../slices/UserSlice";
 import { setNotify } from "../../slices/NotifySlice";
+import { blog, blogsArray, setBlogs } from "../../slices/BlogsSlice";
+import MiniBlog from "../../components/MiniBlog";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -20,6 +22,7 @@ const Home = () => {
   const notifyState: boolean = useSelector(
     (state: any) => state.notify.value.isActive
   );
+  const blogsArray: blogsArray = useSelector((state: any) => state.blogs.value);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -56,7 +59,38 @@ const Home = () => {
     };
     getUserData();
 
-    // TODO: GET USER'S BLOGS
+    const getUserBlogs = async () => {
+      try {
+        const response = await axios({
+          method: "get",
+          url: "http://localhost:4000/blogs",
+          headers: {
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password"),
+          },
+        });
+        if (response.status === 200) dispatch(setBlogs(response.data));
+      } catch (error: any) {
+        if (error.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.message}`,
+            })
+          );
+        else if (error.response.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.response.message}`,
+            })
+          );
+        else console.log(error);
+      }
+    };
+    getUserBlogs();
 
     const getFollowers = async () => {
       try {
@@ -108,32 +142,16 @@ const Home = () => {
                 animate={{ y: 0, opacity: 1, transition: { duration: 0.5 } }}
                 className="relative grid h-[90%] w-full grid-cols-1 gap-4 overflow-y-scroll px-5 py-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
               >
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
-                <div className="h-[25vh] rounded-xl bg-blue-200">Blog</div>
+                {blogsArray.map((blog: blog, index: number) => {
+                  return (
+                    <div
+                      key={index}
+                      className="h-[25vh] overflow-y-scroll rounded-lg transition-all duration-300 hover:scale-110"
+                    >
+                      <MiniBlog data={blog} />
+                    </div>
+                  );
+                })}
               </motion.div>
             </div>
           </div>
