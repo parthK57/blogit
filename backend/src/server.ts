@@ -1,7 +1,12 @@
+import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import ErrorHandler from "./Services/ErrorHandler";
+
+dotenv.config({
+  path: "../.env",
+});
 
 const app = express();
 app.use(cors());

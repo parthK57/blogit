@@ -1,3 +1,4 @@
+import multer from "multer";
 import ErrorHandler from "../Services/ErrorHandler";
 import TimeStamp from "../Services/TimeStamp";
 import db from "../database/db";
@@ -35,6 +36,20 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
   const tags = body.tags;
 
   const timestamp = TimeStamp();
+
+  // IMAGE STORAGE
+  // !WARNING: DO NOT STORE MULTI-MEDIA ON THE SERVERS, ANY CLOUD SERVICE IS ALWAYS PREFERED - S3, CLOUDINARY
+  // *NOTE: STORE THE FILE NAME IN DB AND IMAGE IN THE CLOUD
+  let imageFileName = ""; 
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "/uploads");
+    },
+    filename: function (req, file, cb) {
+      imageFileName = file.fieldname + "-" + username + timestamp;
+      cb(null, file.fieldname + "-" + username + timestamp);
+    },
+  });
 
   try {
     // GET USER ID

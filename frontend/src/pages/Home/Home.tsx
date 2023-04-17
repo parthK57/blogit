@@ -7,13 +7,16 @@ import { motion } from "framer-motion";
 import NavbarHome from "../../components/Navbar/NavbarHome";
 import Sidebar from "./Sidebar";
 import Notify from "../../components/Notify";
+import MiniBlog from "../../components/MiniBlog";
 
 // SLICES
 import { setFollowers } from "../../slices/FollowersSlice";
 import { setUserData } from "../../slices/UserSlice";
 import { setNotify } from "../../slices/NotifySlice";
-import { blog, blogsArray, setBlogs } from "../../slices/BlogsSlice";
-import MiniBlog from "../../components/MiniBlog";
+import { setBlogs } from "../../slices/BlogsSlice";
+
+// TYPES
+import { blog, blogsArray } from "../../slices/BlogsSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -136,7 +139,6 @@ const Home = () => {
           <Sidebar />
           <div className="mt-10 flex h-full w-full flex-col items-center gap-20 overflow-y-scroll md:w-[75%]">
             <div className="flex h-[100%] w-[100%] flex-col gap-8 p-5">
-              {/* // TODO: MAP THE BLOGS ARRAY */}
               <motion.div
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { duration: 0.5 } }}
