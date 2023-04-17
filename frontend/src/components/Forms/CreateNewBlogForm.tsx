@@ -4,6 +4,7 @@ import { setCreateNewBlogModalState } from "../../slices/ModalSlice";
 import { setNotify } from "../../slices/NotifySlice";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import { setBlogs } from "../../slices/BlogsSlice";
 
 const CreateNewBlogForm = () => {
   const dispatch = useDispatch();
@@ -15,24 +16,83 @@ const CreateNewBlogForm = () => {
 
   const createNewBlog = async (e: any) => {
     e.preventDefault();
+    // REQUESTING USERS TO HAVE PATIENCE
+    dispatch(
+      setNotify({
+        isActive: true,
+        type: "alert",
+        message: "Please be patient, the file is being uploaded!",
+      })
+    );
+    // CLOSING THE MODAL & FORM
+    dispatch(setCreateNewBlogModalState(false));
     try {
-      const response = await axios({
-        method: "post",
-        url: "http://localhost:4000/blogs/create",
-        headers: {
-          "Content-Type": "multipart/form-data",
-          username: localStorage.getItem("username"),
-          password: localStorage.getItem("password"),
-        },
-        data: {
-          title,
-          tags,
-          content,
-          blogstatus: blogStatus,
-        },
-      });
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("tags", tags);
+      formData.append("blogstatus", blogStatus);
+      formData.append("content", content);
+      // @ts-expect-error
+      formData.append("image", image);
+
+      const response = await axios.post(
+        "http://localhost:4000/blogs/create",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password"),
+          },
+        }
+      );
+      if (response.status === 201) {
+        dispatch(
+          setNotify({
+            isActive: true,
+            type: "success",
+            message: "Blog Posted!",
+          })
+        );
+        // ------ //
+        // *UPDATING BLOGS ARRAY OF REDUX
+        const getUserBlogs = async () => {
+          try {
+            const response = await axios({
+              method: "get",
+              url: "http://localhost:4000/blogs",
+              headers: {
+                username: localStorage.getItem("username"),
+                password: localStorage.getItem("password"),
+              },
+            });
+            if (response.status === 200) dispatch(setBlogs(response.data));
+          } catch (error: any) {
+            if (error.message)
+              dispatch(
+                setNotify({
+                  isActive: true,
+                  type: "error",
+                  message: `${error.message}`,
+                })
+              );
+            else if (error.response.message)
+              dispatch(
+                setNotify({
+                  isActive: true,
+                  type: "error",
+                  message: `${error.response.message}`,
+                })
+              );
+            else console.log(error);
+          }
+        };
+        getUserBlogs();
+        // ------ //
+
+      }
     } catch (error: any) {
-      if (error.response.data)
+      if (error?.response?.data)
         dispatch(
           setNotify({
             isActive: true,
@@ -40,7 +100,7 @@ const CreateNewBlogForm = () => {
             message: `${error.response.data}`,
           })
         );
-      else if (error.message)
+      else if (error?.message)
         dispatch(
           setNotify({
             isActive: true,
@@ -82,6 +142,7 @@ const CreateNewBlogForm = () => {
                 <label className="text-lg font-semibold">Category:-</label>
                 <select
                   onChange={(e: any) => setBlogStatus(e.target.value)}
+                  defaultValue="Public"
                   className="rounded-md bg-white px-2 py-1 outline-none xl:w-[90%]"
                 >
                   <option value="Public">Public</option>
@@ -92,7 +153,7 @@ const CreateNewBlogForm = () => {
                 <label className="text-lg font-semibold">Image:-</label>
                 <input
                   type="file"
-                  onChange={(e: any) => setImage(e.target.value)}
+                  onChange={(e: any) => setImage(e.target.files[0])}
                   className="rounded-md px-2 py-1 outline-none xl:w-[90%]"
                 />
               </div>

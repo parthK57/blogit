@@ -40,14 +40,13 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
   // IMAGE STORAGE
   // !WARNING: DO NOT STORE MULTI-MEDIA ON THE SERVERS, ANY CLOUD SERVICE IS ALWAYS PREFERED - S3, CLOUDINARY
   // *NOTE: STORE THE FILE URL IN DB AND IMAGE IN THE CLOUD
-
-  const imgDetails = await cloudinary.v2.uploader.upload(image.tempFilePath, {
-    public_id: timestamp,
-    resource_type: "auto",
-    folder: "blogit/blogs",
-  });
-
   try {
+    const imgDetails = await cloudinary.v2.uploader.upload(image.tempFilePath, {
+      public_id: timestamp,
+      resource_type: "auto",
+      folder: "blogit/blogs",
+    });
+    
     // GET USER ID
     const [userData] = (await db.execute(
       "SELECT id FROM users WHERE user_name = ?;",
@@ -71,7 +70,10 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
     res.status(201).json({ res: "success" });
   } catch (error: any) {
     if (error.statusCode) return next(error);
-    else return next(new ErrorHandler("Server error!", 500));
+    else {
+      console.log(error);
+      return next(new ErrorHandler("Server error!", 500));
+    }
   }
 };
 

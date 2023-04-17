@@ -34,7 +34,7 @@ const Notify = () => {
       <motion.div
         initial={{ top: -100, opacity: 0 }}
         animate={{ top: 20, opacity: 1 }}
-        className="absolute top-5 flex h-[100px] w-full items-center justify-center px-4 py-3"
+        className="absolute top-5 z-50 flex h-[100px] w-full items-center justify-center px-4 py-3"
       >
         <div className="flex w-fit min-w-[150px] items-center gap-2 rounded-lg bg-gray-800 py-4 px-4 text-white">
           {notificationData.type === "success" ? (
