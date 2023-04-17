@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCreateNewBlogModalState } from "../../slices/ModalSlice";
-import { setNotify } from "../../slices/NotifySlice";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+
+// SLICES
+import { setCreateNewBlogModalState } from "../../slices/ModalSlice";
+import { setNotify } from "../../slices/NotifySlice";
 import { setBlogs } from "../../slices/BlogsSlice";
 
 const CreateNewBlogForm = () => {
@@ -12,27 +14,35 @@ const CreateNewBlogForm = () => {
   const [tags, setTags] = useState("");
   const [content, setContent] = useState("Preview Window");
   const [blogStatus, setBlogStatus] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(null);
 
   const createNewBlog = async (e: any) => {
     e.preventDefault();
-    // REQUESTING USERS TO HAVE PATIENCE
-    dispatch(
-      setNotify({
-        isActive: true,
-        type: "alert",
-        message: "Please be patient, the file is being uploaded!",
-      })
-    );
-    // CLOSING THE MODAL & FORM
-    dispatch(setCreateNewBlogModalState(false));
     try {
+      if (title.length === 0 || title === "New Blog")
+        throw new Error("Title feild is required!");
+      if (tags.length === 0) throw new Error("Tags feild is required!");
+      if (content.length < 20)
+        throw new Error(
+          "The length of content should be greater than 20 characters!"
+        );
+      if (image === null) throw new Error("Please provide an image!");
+      // REQUESTING USERS TO HAVE PATIENCE
+      dispatch(
+        setNotify({
+          isActive: true,
+          type: "alert",
+          message: "Please be patient, the file is being uploaded!",
+        })
+      );
+      // CLOSING THE MODAL & FORM
+      dispatch(setCreateNewBlogModalState(false));
+
       const formData = new FormData();
       formData.append("title", title);
       formData.append("tags", tags);
       formData.append("blogstatus", blogStatus);
       formData.append("content", content);
-      // @ts-expect-error
       formData.append("image", image);
 
       const response = await axios.post(
@@ -89,7 +99,6 @@ const CreateNewBlogForm = () => {
         };
         getUserBlogs();
         // ------ //
-
       }
     } catch (error: any) {
       if (error?.response?.data)
@@ -100,15 +109,16 @@ const CreateNewBlogForm = () => {
             message: `${error.response.data}`,
           })
         );
-      else if (error?.message)
+      else if (error.message) {
+        console.log(error);
         dispatch(
           setNotify({
             isActive: true,
             type: "error",
-            message: `${error.response.data}`,
+            message: `${error.message}`,
           })
         );
-      else console.log(error);
+      }
     }
   };
 

@@ -33,7 +33,7 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
   const content = body.content;
   const blogStatus = body.blogstatus;
   const tags = body.tags;
-  const image = req.files.image;
+  const image = req.files?.image;
 
   const timestamp = TimeStamp();
 
@@ -46,7 +46,7 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
       resource_type: "auto",
       folder: "blogit/blogs",
     });
-    
+
     // GET USER ID
     const [userData] = (await db.execute(
       "SELECT id FROM users WHERE user_name = ?;",

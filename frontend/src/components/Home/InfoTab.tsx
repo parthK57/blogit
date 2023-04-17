@@ -25,12 +25,13 @@ const InfoTab = () => {
   const [dropDown, setDropDown] = useState(false);
   const dispatch = useDispatch();
   const userData: userObject = useSelector((state: any) => state.user.value[0]);
-  
+  // TODO: PROFILE PICTURE BUG
   return (
     <>
       <div className="flex w-[100%] items-center justify-center">
         <div
-          className={`relative -top-7 h-[70px] w-[70px] rounded-full bg-[url('/Profilepicture.png')] bg-contain bg-no-repeat p-2 pb-0 md:h-[60px] md:w-[60px]`}
+          style={{ backgroundImage: `url('${userData?.profile_picture}')` }}
+          className={`w-[70 px] relative -top-7  h-[70px] rounded-full bg-contain bg-no-repeat p-2 pb-0 md:h-[60px] md:w-[60px]`}
         />
       </div>
       <div className="absolute top-0 right-0 p-3">

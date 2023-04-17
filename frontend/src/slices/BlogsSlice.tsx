@@ -12,10 +12,10 @@ export type blog = {
   title: string;
   content: content;
   image: string;
-  blogsStatus: string;
-  dateCreated: string;
-  upVotes: string;
-  downVotes: string;
+  blog_status: string;
+  date_created: string;
+  up_votes: string;
+  down_votes: string;
   tags: string[];
   createdBy: string;
 };
