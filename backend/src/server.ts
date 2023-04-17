@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+import cloudinary from "cloudinary";
+import fileUpload from "express-fileupload";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -8,9 +10,20 @@ dotenv.config({
   path: "../.env",
 });
 
+cloudinary.v2.config({
+  cloud_name: process.env.CLD_NAME,
+  api_key: process.env.CLD_API_KEY,
+  api_secret: process.env.CLD_API_SECRET,
+});
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+  })
+);
 
 // ROUTES
 import userRoute from "./routes/users";

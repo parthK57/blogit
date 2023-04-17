@@ -2,7 +2,7 @@ export interface createBlogBody {
   title: string;
   content: string;
   image: string;
-  blogStatus: string;
+  blogstatus: string;
   tags: string;
 }
 

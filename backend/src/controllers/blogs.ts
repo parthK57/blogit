@@ -1,4 +1,4 @@
-import multer from "multer";
+import cloudinary from "cloudinary";
 import ErrorHandler from "../Services/ErrorHandler";
 import TimeStamp from "../Services/TimeStamp";
 import db from "../database/db";
@@ -31,24 +31,20 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
   const body: createBlogBody = req.body;
   const title = body.title;
   const content = body.content;
-  const blogStatus = body.blogStatus;
-  const image = body.image;
+  const blogStatus = body.blogstatus;
   const tags = body.tags;
+  const image = req.files.image;
 
   const timestamp = TimeStamp();
 
   // IMAGE STORAGE
   // !WARNING: DO NOT STORE MULTI-MEDIA ON THE SERVERS, ANY CLOUD SERVICE IS ALWAYS PREFERED - S3, CLOUDINARY
-  // *NOTE: STORE THE FILE NAME IN DB AND IMAGE IN THE CLOUD
-  let imageFileName = ""; 
-  const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, "/uploads");
-    },
-    filename: function (req, file, cb) {
-      imageFileName = file.fieldname + "-" + username + timestamp;
-      cb(null, file.fieldname + "-" + username + timestamp);
-    },
+  // *NOTE: STORE THE FILE URL IN DB AND IMAGE IN THE CLOUD
+
+  const imgDetails = await cloudinary.v2.uploader.upload(image.tempFilePath, {
+    public_id: timestamp,
+    resource_type: "auto",
+    folder: "blogit/blogs",
   });
 
   try {
@@ -62,7 +58,15 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
     // EXECUTE INSERT
     await db.execute(
       "INSERT INTO blogs (title, content, blog_status, image, date_created, user_name, tags) VALUES (?,?,?,?,?,?,?);",
-      [title, content, blogStatus, image, timestamp, userId, tags]
+      [
+        title,
+        content,
+        blogStatus,
+        imgDetails.secure_url,
+        timestamp,
+        userId,
+        tags,
+      ]
     );
     res.status(201).json({ res: "success" });
   } catch (error: any) {
