@@ -69,6 +69,7 @@ CREATE TABLE blogs(
   `title` VARCHAR(100) NOT NULL,
   `content` LONGTEXT NOT NULL,
   `image` TEXT NOT NULL,
+  `tags` VARCHAR(150) NOT NULL,
   `blog_status` VARCHAR(10) NOT NULL,
   `date_created` VARCHAR(100) NOT NULL,
   `up_votes` BIGINT NOT NULL,

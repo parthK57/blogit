@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 // COMPONENTS
 import EditUserDetailsModal from "../Explore/EditUserDetailsModal";
+import CreateNewBlogMoal from "./CreateNewBlogMoal";
 import UtilityTab from "../../components/Home/UtilityTab";
 import InfoTab from "../../components/Home/InfoTab";
 
@@ -12,6 +13,9 @@ const Sidebar = () => {
   );
   const displayState: string = useSelector(
     (state: any) => state.modals.value.sidebarDispay
+  );
+  const createNewBlogModalState: boolean = useSelector(
+    (state: any) => state.modals.value.createNewBlogModalState
   );
 
   return (
@@ -28,6 +32,7 @@ const Sidebar = () => {
           <UtilityTab />
         </div>
         {editUserModalState && <EditUserDetailsModal />}
+        {createNewBlogModalState && <CreateNewBlogMoal />}
       </motion.div>
     </>
   );

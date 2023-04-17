@@ -12,6 +12,7 @@ import { clearAllFilters } from "../../slices/FiltersSlice";
 import { clearFollowers } from "../../slices/FollowersSlice";
 import { clearNotifications } from "../../slices/NotificationSlice";
 import { clearUserData } from "../../slices/UserSlice";
+import { setCreateNewBlogModalState } from "../../slices/ModalSlice";
 
 const UtilityTab = () => {
   const dispatch = useDispatch();
@@ -37,8 +38,10 @@ const UtilityTab = () => {
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <IoCreate className="text-xl text-white" />
-            {/* // TODO: CREATE A CREATE NEW BLOG FUNCTION */}
-            <button className="w-[80px] scale-90 rounded-md bg-blue-500 px-2 py-1 text-white transition-all duration-300 hover:bg-yellow-400">
+            <button
+              onClick={() => dispatch(setCreateNewBlogModalState(true))}
+              className="w-[80px] scale-90 rounded-md bg-blue-500 px-2 py-1 text-white transition-all duration-300 hover:bg-yellow-400"
+            >
               Create
             </button>
           </div>

@@ -75,6 +75,7 @@ export const createBlogHandler = async (req: any, res: any, next: any) => {
   }
 };
 
+// TODO: UPDATE THIS SHIT WITH CLOUDINARY
 export const updateBlogHandler = async (req: any, res: any, next: any) => {
   const body: updateBlogBody = req.body;
   const blogId = parseInt(body.id);

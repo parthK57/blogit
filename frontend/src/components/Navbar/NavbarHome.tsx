@@ -43,7 +43,7 @@ const NavbarHome = () => {
         />
       </div>
       {toggleHamburger && (
-        <div className="absolute top-0 left-0 z-10 flex h-screen w-screen flex-col items-center justify-center gap-5 bg-blue-100">
+        <div className="absolute top-0 left-0 z-50 flex h-screen w-screen flex-col items-center justify-center gap-5 bg-blue-100">
           <p
             onClick={() => navigate("/home")}
             className="pointer-events-auto w-[130px] cursor-pointer rounded-lg bg-blue-200 px-3 py-2 text-xl"
