@@ -12,7 +12,10 @@ import { clearAllFilters } from "../../slices/FiltersSlice";
 import { clearFollowers } from "../../slices/FollowersSlice";
 import { clearNotifications } from "../../slices/NotificationSlice";
 import { clearUserData } from "../../slices/UserSlice";
-import { setCreateNewBlogModalState } from "../../slices/ModalSlice";
+import {
+  setCreateNewBlogModalState,
+  setFollowUserModalState,
+} from "../../slices/ModalSlice";
 
 const UtilityTab = () => {
   const dispatch = useDispatch();
@@ -47,8 +50,10 @@ const UtilityTab = () => {
           </div>
           <div className="flex items-center gap-2">
             <AiOutlineUserAdd className="text-xl text-white" />
-            {/* // TODO: CREATE A FOLLOW FUNCTION */}
-            <button className="w-[80px] scale-90 rounded-md bg-sky-500 px-2 py-1 text-white transition-all duration-300 hover:bg-green-400">
+            <button
+              onClick={() => dispatch(setFollowUserModalState(true))}
+              className="w-[80px] scale-90 rounded-md bg-sky-500 px-2 py-1 text-white transition-all duration-300 hover:bg-green-400"
+            >
               Follow
             </button>
           </div>

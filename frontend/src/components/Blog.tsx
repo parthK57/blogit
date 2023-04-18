@@ -8,7 +8,7 @@ import { blogData } from "./MiniBlog";
 const Blog = ({ data }: blogData) => {
   return (
     <>
-      <div className="h-auto w-[90%] rounded-lg bg-blue-100 p-5 shadow md:w-[80%] lg:w-[70%] xl:w-[60%]">
+      <div className="h-auto mb-5 w-[90%] rounded-lg bg-blue-100 p-5 shadow md:w-[80%] lg:w-[70%] xl:w-[60%]">
         <div className="max-w-fit rounded-[15px] bg-blue-300 p-3 text-3xl md:p-5">
           {data.title}
         </div>
@@ -26,7 +26,7 @@ const Blog = ({ data }: blogData) => {
             )}
           </span>
         </div>
-        <div className="mt-16 prose prose-stone h-[80vh] w-[100%] overflow-y-scroll">
+        <div className="mt-16 prose prose-neutral h-[80vh] w-[100%] overflow-y-scroll">
           <ReactMarkdown>{data.content}</ReactMarkdown>
         </div>
       </div>

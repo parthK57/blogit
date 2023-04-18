@@ -76,7 +76,7 @@ const EditUserDetailsForm = () => {
     <>
       <div className="flex w-[100%] items-center justify-center">
         <form className="flex w-[100%] scale-95 flex-col gap-1 overflow-hidden rounded-[20px] bg-blue-100 p-5 md:w-[50%] xl:w-[45%]">
-          <div className="mt-3 flex w-[200px] items-center justify-center rounded-[25px] bg-blue-200 py-5 text-2xl text-black">
+          <div className="mt-3 flex w-[200px] items-center justify-center rounded-[25px] bg-blue-300 py-5 text-2xl text-black">
             Edit Details
           </div>
           <div className="mt-5 grid h-[50vh] grid-cols-1 gap-4 overflow-y-scroll px-5 lg:grid-cols-2">

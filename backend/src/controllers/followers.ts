@@ -3,8 +3,8 @@ import TimeStamp from "../Services/TimeStamp";
 import db from "../database/db";
 
 export const followUserHandler = async (req: any, res: any, next: any) => {
-  const user_name = req.body.user_name as string;
-  const followUsername = req.body.followUsername as string;
+  const username = req.headers.username as string;
+  const followUsername = req.body.followusername as string;
 
   const timestamp = TimeStamp();
 
@@ -12,7 +12,7 @@ export const followUserHandler = async (req: any, res: any, next: any) => {
     // GET USER'S ID
     const [userData] = (await db.execute(
       "SELECT id FROM users WHERE user_name = ?;",
-      [user_name]
+      [username]
     )) as any;
     const userId = userData[0].id;
 

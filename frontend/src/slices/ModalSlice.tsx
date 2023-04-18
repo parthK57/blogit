@@ -6,6 +6,7 @@ export const ModalSlice = createSlice({
     value: {
       userEditModalIsActiveState: false,
       createNewBlogModalState: false,
+      followUserModalState: false,
       sidebarDispay: "hidden",
     },
   },
@@ -16,6 +17,9 @@ export const ModalSlice = createSlice({
     setCreateNewBlogModalState: (state, action) => {
       state.value.createNewBlogModalState = action.payload;
     },
+    setFollowUserModalState: (state, action) => {
+      state.value.followUserModalState = action.payload;
+    },
     setSidebarDisplay: (state, action) => {
       state.value.sidebarDispay = action.payload;
     },
@@ -25,5 +29,6 @@ export const ModalSlice = createSlice({
 export const {
   setUserEditModalIsActiveState,
   setCreateNewBlogModalState,
+  setFollowUserModalState,
   setSidebarDisplay,
 } = ModalSlice.actions;
