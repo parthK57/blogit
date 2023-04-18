@@ -1,22 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// TYPES
-interface content {
-  heading: string;
-  subheading: string;
-  body: string;
-}
-
 export type blog = {
   id: string;
   title: string;
-  content: content;
+  content: string;
   image: string;
   blog_status: string;
   date_created: string;
   up_votes: string;
   down_votes: string;
-  tags: string[];
+  tags: string;
   createdBy: string;
 };
 export type blogsArray = blog[];

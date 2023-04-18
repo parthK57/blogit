@@ -31,7 +31,6 @@ const MiniBlog = ({ data }: blogData) => {
           </span>
         </div>
         <div className="mt-10 flex h-[80vh] w-[100%] flex-col overflow-y-scroll">
-          {/* @ts-expect-error */}
           <ReactMarkdown className="prose prose-stone">
             {data.content}
           </ReactMarkdown>

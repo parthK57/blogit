@@ -21,7 +21,21 @@ This web-app is created with following tech-stack:-
 
 ### Home Page
 
+Home
+
 ![Home Page](./frontend/public/HomePage.png)
+
+Create Blog Form
+
+![Create Blog Form](./frontend/public/CreateBlogForm.png)
+
+![Create Blog Form-1](./frontend/public/CreateBlogForm1.png)
+
+Edit User Details Form
+
+![Edit User Details Form](./frontend/public/EditUserDetailsForm.png)
+
+## Database
 
 ##### Schema
 

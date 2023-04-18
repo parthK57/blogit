@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 // COMPONENTS
@@ -12,10 +12,14 @@ import { setNotify } from "../../slices/NotifySlice";
 import { setUserData } from "../../slices/UserSlice";
 import { setFollowers } from "../../slices/FollowersSlice";
 
+// TYPES
+import { blog, blogsArray, setBlogs } from "../../slices/BlogsSlice";
+
 const Explore = () => {
   const dispatch = useDispatch();
   const username = localStorage.getItem("username") as string;
   const password = localStorage.getItem("password") as string;
+  const blogsArray: blogsArray = useSelector((state: any) => state.blogs.value);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -51,6 +55,39 @@ const Explore = () => {
       }
     };
     getUserData();
+
+    const getUserBlogs = async () => {
+      try {
+        const response = await axios({
+          method: "get",
+          url: "http://localhost:4000/blogs/public/getrandom",
+          headers: {
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password"),
+          },
+        });
+        if (response.status === 200) dispatch(setBlogs(response.data));
+      } catch (error: any) {
+        if (error.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.message}`,
+            })
+          );
+        else if (error.response.message)
+          dispatch(
+            setNotify({
+              isActive: true,
+              type: "error",
+              message: `${error.response.message}`,
+            })
+          );
+        else console.log(error);
+      }
+    };
+    getUserBlogs();
 
     const getFollowers = async () => {
       try {
@@ -95,7 +132,9 @@ const Explore = () => {
         <div className="flex h-[calc(100vh-80px)] w-screen items-center gap-10 overflow-y-scroll">
           <Sidebar />
           <div className="mt-10 flex h-[calc(100vh-80px)] flex-col items-center gap-20 overflow-y-scroll md:w-[75%]">
-            
+            {blogsArray.map((blog: blog) => {
+              return <Blog key={blog.id} data={blog} />;
+            })}
           </div>
         </div>
       </div>

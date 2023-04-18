@@ -17,7 +17,7 @@ const Blog = ({ data }: blogData) => {
             style={{ backgroundImage: `url('${data.image}')` }}
             className="mt-3 h-[40vh] w-[100%] rounded-md bg-contain bg-center bg-no-repeat transition-all duration-500 ease-in-out hover:w-[100%] md:w-[85%] md:bg-cover"
           />
-          <span className="absolute -bottom-8 right-0 flex w-full items-center justify-end gap-2 border-b border-black pb-1 text-base">
+          <span className="absolute -bottom-12 right-0 flex w-full items-center justify-end gap-2 border-b border-black pb-1 text-base">
             {data.date_created.split(" ")[0]}
             {data.blog_status === "Public" ? (
               <BsGlobeAmericas className="text-xl text-green-500" />
@@ -26,8 +26,7 @@ const Blog = ({ data }: blogData) => {
             )}
           </span>
         </div>
-        <div className="mt-3 flex h-[80vh] w-[100%] flex-col overflow-y-scroll">
-          {/* @ts-expect-error */}
+        <div className="mt-16 prose prose-stone h-[80vh] w-[100%] overflow-y-scroll">
           <ReactMarkdown>{data.content}</ReactMarkdown>
         </div>
       </div>

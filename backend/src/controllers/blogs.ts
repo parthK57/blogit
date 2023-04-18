@@ -149,7 +149,7 @@ export const getRandomPublicBlogsHandler = async (
     const [randomBlogsData] = (await db.execute(
       `SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.blog_status, blogs.date_created,
       blogs.up_votes, blogs.down_votes, blogs.tags, users.user_name FROM blogs INNER JOIN users ON (blogs.user_name = users.id)
-      WHERE blogs.blog_status = 'Public' ORDER BY RAND() LIMIT 1;`
+      WHERE blogs.blog_status = 'Public' ORDER BY RAND() LIMIT 20;`
     )) as any;
     res.status(200).json(randomBlogsData);
   } catch (error: any) {
@@ -177,7 +177,7 @@ export const getRandomFollowersBlogsHandler = async (
       await db.execute(`SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.blog_status, blogs.date_created,
       blogs.up_votes, blogs.down_votes, blogs.tags, users.user_name FROM blogs INNER JOIN users ON (blogs.user_name = users.id)
       INNER JOIN followers ON ((blogs.user_name = followers.user1) OR (blogs.user_name = followers.user2)) 
-      WHERE followers.user2 = ${userId} OR followers.user1 = ${userId} ORDER BY RAND() LIMIT 2;`);
+      WHERE followers.user2 = ${userId} OR followers.user1 = ${userId} ORDER BY RAND() LIMIT 20;`);
 
     res.status(200).json(randomBlogsData);
   } catch (error: any) {
