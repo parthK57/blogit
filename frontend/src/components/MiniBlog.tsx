@@ -7,7 +7,7 @@ import { AiFillLock } from "react-icons/ai";
 // TYPES
 import { blog } from "../slices/BlogsSlice";
 
-type blogData = { data: blog };
+export type blogData = { data: blog };
 
 const MiniBlog = ({ data }: blogData) => {
   return (

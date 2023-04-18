@@ -147,7 +147,9 @@ export const getRandomPublicBlogsHandler = async (
   try {
     // GETTING RANDOM BLOGS
     const [randomBlogsData] = (await db.execute(
-      "SELECT id, title, content, image, blog_status, date_created, up_votes, down_votes, user_name, tags FROM blogs ORDER by id DESC LIMIT 25;"
+      `SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.blog_status, blogs.date_created,
+      blogs.up_votes, blogs.down_votes, blogs.tags, users.user_name FROM blogs INNER JOIN users ON (blogs.user_name = users.id)
+      WHERE blogs.blog_status = 'Public' ORDER BY RAND() LIMIT 1;`
     )) as any;
     res.status(200).json(randomBlogsData);
   } catch (error: any) {
@@ -172,10 +174,10 @@ export const getRandomFollowersBlogsHandler = async (
 
     // GET RANDOM BLOGS FROM FOLLOWERS
     const [randomBlogsData] =
-      await db.execute(`SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.blog_status, 
-    blogs.date_created, blogs.up_votes, blogs.down_votes, blogs.tags FROM blogs 
-    inner join followers on (followers.user1 = blogs.user_name) 
-    where followers.user1 = ${userId} or followers.user2 = ${userId} ORDER BY blogs.id DESC LIMIT 25;`);
+      await db.execute(`SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.blog_status, blogs.date_created,
+      blogs.up_votes, blogs.down_votes, blogs.tags, users.user_name FROM blogs INNER JOIN users ON (blogs.user_name = users.id)
+      INNER JOIN followers ON ((blogs.user_name = followers.user1) OR (blogs.user_name = followers.user2)) 
+      WHERE followers.user2 = ${userId} OR followers.user1 = ${userId} ORDER BY RAND() LIMIT 2;`);
 
     res.status(200).json(randomBlogsData);
   } catch (error: any) {

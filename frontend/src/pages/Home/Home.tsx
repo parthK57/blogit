@@ -138,7 +138,14 @@ const Home = () => {
         <div className="flex h-[calc(100vh-80px)] w-screen flex-col items-center gap-10 overflow-y-scroll md:flex-row">
           <Sidebar />
           <div className="mt-10 flex h-full w-full flex-col items-center gap-20 overflow-y-scroll md:w-[75%]">
-            <div className="flex h-[100%] w-[100%] flex-col gap-8 p-5">
+            <div className="flex h-[100%] w-[100%] flex-col gap-4 p-5">
+              <motion.h2
+                initial={{ y: -100 }}
+                animate={{ y: 0 , transition: {duration: 0.5}}}
+                className="relative w-fit rounded-md bg-sky-100 px-4 py-2 text-2xl"
+              >
+                My Blogs
+              </motion.h2>
               <motion.div
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { duration: 0.5 } }}

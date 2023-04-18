@@ -19,6 +19,10 @@ This web-app is created with following tech-stack:-
 
 ![Explore Page](./frontend/public/ExplorePage.png)
 
+### Home Page
+
+![Home Page](./frontend/public/HomePage.png)
+
 ##### Schema
 
 ```sql
