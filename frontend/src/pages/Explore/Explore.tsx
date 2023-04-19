@@ -6,11 +6,12 @@ import axios from "axios";
 import Blog from "../../components/Blog";
 import NavbarHome from "../../components/Navbar/NavbarHome";
 import Sidebar from "./Sidebar";
-import { setNotify } from "../../slices/NotifySlice";
+import Notify from "../../components/Notify";
 
 // SLICES
 import { setUserData } from "../../slices/UserSlice";
 import { setFollowers } from "../../slices/FollowersSlice";
+import { setNotify } from "../../slices/NotifySlice";
 
 // TYPES
 import { blog, blogsArray, setBlogs } from "../../slices/BlogsSlice";
@@ -20,7 +21,9 @@ const Explore = () => {
   const username = localStorage.getItem("username") as string;
   const password = localStorage.getItem("password") as string;
   const blogsArray: blogsArray = useSelector((state: any) => state.blogs.value);
-
+  const notifyState: boolean = useSelector(
+    (state: any) => state.notify.value.isActive
+  );
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -137,6 +140,7 @@ const Explore = () => {
             })}
           </div>
         </div>
+        {notifyState && <Notify />}
       </div>
     </>
   );

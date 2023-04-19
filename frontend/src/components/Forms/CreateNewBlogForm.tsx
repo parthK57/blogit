@@ -22,11 +22,13 @@ const CreateNewBlogForm = () => {
       if (title.length === 0 || title === "New Blog")
         throw new Error("Title feild is required!");
       if (tags.length === 0) throw new Error("Tags feild is required!");
+      if (blogStatus === "Not Selected" || blogStatus.length === 0)
+        throw new Error("Please set the blog status!");
+      if (image === null) throw new Error("Please provide an image!");
       if (content.length < 20)
         throw new Error(
           "The length of content should be greater than 20 characters!"
         );
-      if (image === null) throw new Error("Please provide an image!");
       // REQUESTING USERS TO HAVE PATIENCE
       dispatch(
         setNotify({
@@ -152,11 +154,21 @@ const CreateNewBlogForm = () => {
                 <label className="text-lg font-semibold">Category:-</label>
                 <select
                   onChange={(e: any) => setBlogStatus(e.target.value)}
-                  defaultValue="Public"
                   className="rounded-md bg-white px-2 py-1 outline-none xl:w-[90%]"
                 >
-                  <option value="Public">Public</option>
-                  <option value="Private">Private</option>
+                  <option value="Not Selected">Not Selected</option>
+                  <option
+                    onClick={() => setBlogStatus("Public")}
+                    value="Public"
+                  >
+                    Public
+                  </option>
+                  <option
+                    onClick={() => setBlogStatus("Private")}
+                    value="Private"
+                  >
+                    Private
+                  </option>
                 </select>
               </div>
               <div className="flex flex-col gap-1">

@@ -54,7 +54,7 @@ const FollowUserForm = () => {
   };
 
   return (
-    <form className="flex w-[85%] scale-95 flex-col gap-1 overflow-hidden rounded-[20px] bg-blue-100 p-5 sm:w-[55%] md:w-[75%] md:scale-90 lg:w-[20%] lg:scale-100">
+    <form className="flex w-[85%] scale-95 flex-col gap-1 overflow-hidden rounded-[20px] bg-blue-100 p-5 sm:w-[55%] md:w-[35%] md:scale-90 lg:w-[30%] lg:scale-100 xl:w-[20%]">
       <div className="mt-3 flex w-[100%] items-center justify-center rounded-[25px] bg-blue-200 py-4 text-2xl text-black">
         Follow User
       </div>

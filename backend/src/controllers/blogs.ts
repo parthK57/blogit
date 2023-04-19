@@ -148,7 +148,7 @@ export const getRandomPublicBlogsHandler = async (
     // GETTING RANDOM BLOGS
     const [randomBlogsData] = (await db.execute(
       `SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.blog_status, blogs.date_created,
-      blogs.up_votes, blogs.down_votes, blogs.tags, users.user_name FROM blogs INNER JOIN users ON (blogs.user_name = users.id)
+      blogs.up_votes, blogs.down_votes, blogs.tags, users.user_name, users.full_name FROM blogs INNER JOIN users ON (blogs.user_name = users.id)
       WHERE blogs.blog_status = 'Public' ORDER BY RAND() LIMIT 20;`
     )) as any;
     res.status(200).json(randomBlogsData);

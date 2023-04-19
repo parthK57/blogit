@@ -9,6 +9,8 @@ export const followUserHandler = async (req: any, res: any, next: any) => {
   const timestamp = TimeStamp();
 
   try {
+    if (username === followUsername)
+      throw new ErrorHandler("Can't follow yourself!", 400);
     // GET USER'S ID
     const [userData] = (await db.execute(
       "SELECT id FROM users WHERE user_name = ?;",
@@ -31,7 +33,7 @@ export const followUserHandler = async (req: any, res: any, next: any) => {
       [userId, followerId, followerId, userId]
     )) as any;
     if (followData.length !== 0)
-      throw new ErrorHandler("Cannot follow user twice!", 400);
+      throw new ErrorHandler("Can't follow user twice!", 400);
 
     // EXECUTE
     (await db.execute(
